@@ -1,0 +1,568 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">  
+    
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <title>MBSR week 5</title>
+    <meta name="description" content="MBSR week 5 page">
+    <meta name="author" content="MBSR@ISTC">
+    
+    <!-- Include JS libraries -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/js.cookie.js"></script>
+    <script src="js/tools.js"></script>
+
+    <!-- Check if user is logged; otherwise, go to login page -->
+    <script>
+        if (!checkLogin()) {
+            window.location.href = 'index.html';
+        }
+    </script>
+
+    
+</head>
+
+<body onload="check_boxes()">
+    <div class="container-fluid d-flex align-items-center justify-content-center" style="background:url('media/blue_wall.jpg')no-repeat center center fixed">
+        <div class="row d-flex justify-content-center">
+            <div class="col">
+                <p></p>
+                <!-- Heading -->
+                <h2 class="display-5 font-bold text-center white-text mb-2 animated fadeInDown">QUINTA SETTIMANA</h2><br>
+            
+                <!--Panel-->
+                <div class="card animated fadeInLeft">
+                    <h4 class="card-header primary-color white-text">Compiti giornalieri</h3>
+                    
+                    <div class="card-body">
+                        
+                        <div class="container">
+                            <div class="row" id="row_act1">
+                                <div class="col">
+                                    <input type="checkbox" name="act1" id="act1" onclick="check_act_1();" autocomplete="off"> Alterna le seguenti (una pratica al giorno):<br>
+                                    <p></p>
+                                    
+                                    <ul class="fa-ul">
+                                        <li><i class="fa-li fa fa-square"></i>Meditazione seduta (25 min)</li>
+                                        <li><audio id="trackMS" src="mbsr_tracks/med_sed.mp3" type = "audio/mp3">Your browser does not support HTML5 audio.</audio>
+                                            <div class="btn-group">
+                                                <button class="btn btn-blue" id="btn_playMS" onclick="trackMSPlay()"><i class="fa fa-play"></i></button>
+                                                <button class="btn btn-yellow" id="btn_pauseMS" onclick="trackMSPause()" disabled><i class="fa fa-pause"></i></button>
+                                                <button class="btn btn-red" id="btn_stopMS" onclick="trackMSStop()" disabled><i class="fa fa-stop"></i></button>
+                                            </div>
+                                        </li><br>
+                                        
+                                        <li><i class="fa-li fa fa-square"></i>Body scan (30 min)</li>
+                                        <li><audio id="trackBS" src="mbsr_tracks/body_scan.mp3" type = "audio/mp3">Your browser does not support HTML5 audio.</audio>
+                                            <div class="btn-group">
+                                                <button class="btn btn-blue" id="btn_playBS" onclick="trackBSPlay()"><i class="fa fa-play"></i></button>
+                                                <button class="btn btn-yellow" id="btn_pauseBS" onclick="trackBSPause()" disabled><i class="fa fa-pause"></i></button>
+                                                <button class="btn btn-red" id="btn_stopBS" onclick="trackBSStop()" disabled><i class="fa fa-stop"></i></button>
+                                            </div>
+                                        </li><br>
+                                        
+                                        <li><i class="fa-li fa fa-square"></i>Movimento consapevole (40 min)</li>
+                                        <li><audio id="trackMC" src="mbsr_tracks/mov_cons.mp3" type = "audio/mp3">Your browser does not support HTML5 audio.</audio>
+                                            <div class="btn-group">
+                                                <button class="btn btn-blue" id="btn_playMC" onclick="trackMCPlay()"><i class="fa fa-play"></i></button>
+                                                <button class="btn btn-yellow" id="btn_pauseMC" onclick="trackMCPause()" disabled><i class="fa fa-pause"></i></button>
+                                                <button class="btn btn-red" id="btn_stopMC" onclick="trackMCStop()" disabled><i class="fa fa-stop"></i></button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <br>
+                                    
+                            <div class="row" id="row_act2">
+                                <div class="col">
+                                    <input type="checkbox" name="act2" id="act2" onclick="check_act_2();" autocomplete="off"> Diario della pratica<p></p>
+                                </div>
+                            </div>
+                                        
+                            <div class="row" id="row_act3">
+                                <div class="col">
+                                    <input type="checkbox" name="act3" id="act3" onclick="check_act_3();" autocomplete="off"> Calendario delle comunicazioni difficili<p></p>
+                                </div>
+                            </div>
+                            
+                            <div class="row" id="row_act4">
+                                <div class="col">
+                                    <input type="checkbox" name="act4" id="act4" onclick="check_act_4();" autocomplete="off"> Consapevolezza dei nostri momenti ‘reattivi’: esplora le possibili risposte con consapevolezza, creatività, spaziosità, sia nella pratica formale che nella vita; prova a rallentare e fare scelte più consapevoli<p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/.Panel-->
+                    
+                <br>
+                    
+                <!--Panel-->
+                <div class="card animated fadeInLeft">
+                    <h4 class="card-header primary-color white-text">Altre attività da fare entro il prossimo incontro</h4>
+                    <div class="card-body">
+                        <input type="checkbox" name="actw1" id="actw1" onclick="check_actw1();"> Compila (e riconsegna) i fogli di feedback di metà corso<br>
+                        <input type="checkbox" name="actw2" id="actw2" onclick="check_actw2();"> Lettura della settimana
+                    </div>
+                </div><p></p>
+                <!--/.Panel-->
+                
+                <!--Panel-->
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="button" class="btn btn-flat btn-lg" style="background-color: Transparent; background-repeat:no-repeat; border: none; cursor:pointer; overflow: hidden; outline:none;"
+                            onclick="location.href='weeks.html'">
+                            <i class="fa fa-home"></i> Home</button>
+                    </div>
+                    <div class="col text-center">
+                        <button type="button" class="btn btn-flat btn-lg" style="background-color: Transparent; background-repeat:no-repeat; border: none; cursor:pointer; overflow: hidden; outline:none;"
+                            onclick="functionLogout();">
+                            <i class="fa fa-sign-out"></i> Logout</button>
+                    </div>
+                </div>
+                <p></p>
+                <!--/.Panel-->
+
+            </div>
+        </div>
+
+        <!-- Hidden form for submit -->
+        <form method="post" id="action_form" name="action_form" action="#">
+            <input type="hidden" id="m_sent" name="m_sent" value="">        
+            <input type="hidden" id="m_id" name="m_id" value="">            
+            <input type="hidden" id="m_username" name="m_username" value="">            
+            <input type="hidden" id="m_action" name="m_action" value="">
+            <input type="hidden" id="m_week" name="m_week" value="">
+            <input type="hidden" id="m_day" name="m_day" value="">
+            <input type="hidden" id="m_device" name="m_device" value="app">    
+        </form>
+
+        <!-- Hidden button and text to log data -->
+        <div hidden>
+            <input type="text" id="log_text" />
+            <button id="log_btn"></button>
+        </div>
+    </div>
+
+    <script>
+        // Check which day of the week is the actual one
+        var now = new Date();
+        var weekStart = new Date(window.localStorage.getItem('mbsr_week_5'));
+        var weekday = Math.ceil((now.getTime() - weekStart.getTime()) / (1000 * 3600 * 24));
+
+        // Set the log information
+        document.getElementById("m_id").value = window.localStorage.getItem("id");
+        document.getElementById("m_username").value = window.localStorage.getItem("username");
+        document.getElementById("m_week").value = "5";
+        document.getElementById("m_day").value = weekday;
+        document.getElementById("m_sent").value = "";
+
+        // Check the daily activities already done 
+        function check_boxes() {
+            if (window.localStorage.getItem("week5_actw1_done") == "1") {
+                $('#actw1').prop('checked', true);
+            }
+            if (window.localStorage.getItem("week5_actw2_done") == "1") {
+                $('#actw2').prop('checked', true);
+            }
+            if (window.localStorage.getItem("week5_actw3_done") == "1") {
+                $('#actw3').prop('checked', true);
+            }
+            if (window.localStorage.getItem("week5_act1_done") == "1") {
+                $('#act1').prop('checked', true);
+                $('#row_act1').addClass('animated pulse');
+            }
+            if (window.localStorage.getItem("week5_act2_done") == "1") {
+                $('#act2').prop('checked', true);
+                $('#row_act2').addClass('animated pulse');
+            }
+            if (window.localStorage.getItem("week5_act3_done") == "1") {
+                $('#act3').prop('checked', true);
+                $('#row_act3').addClass('animated pulse');
+            }
+            if (window.localStorage.getItem("week5_act4_done") == "1") {
+                $('#act4').prop('checked', true);
+                $('#row_act4').addClass('animated pulse');
+            }
+        }
+
+        // On checks, set a cookie to memorize the checked boxes
+        function check_actw1() {
+            if (document.getElementById('actw1').checked) {
+                window.localStorage.setItem("week5_actw1_done", "1");
+                document.getElementById("m_action").value = "do_w1";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+            } else {
+                window.localStorage.setItem("week5_actw1_done", "0");
+                document.getElementById("m_action").value = "undo_w1";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+            }
+        }
+
+        function check_actw2() {
+            if (document.getElementById('actw2').checked) {
+                window.localStorage.setItem("week5_actw2_done", "1");
+                document.getElementById("m_action").value = "do_w2";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+            } else {
+                window.localStorage.setItem("week5_actw2_done", "0");
+                document.getElementById("m_action").value = "undo_w2";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+            }
+        }
+
+        function check_actw3() {
+            if (document.getElementById('actw3').checked) {
+                window.localStorage.setItem("week5_actw3_done", "1");
+                document.getElementById("m_action").value = "do_w3";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+            } else {
+                window.localStorage.setItem("week5_actw3_done", "0");
+                document.getElementById("m_action").value = "undo_w3";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+            }
+        }
+        
+        function check_act_1() {
+            if (document.getElementById('act1').checked) {
+                window.localStorage.setItem("week5_act1_done", "1");
+                document.getElementById("m_action").value = "do1";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+                $('#row_act1').addClass('animated pulse');
+            } else {
+                window.localStorage.setItem("week5_act1_done", "0");
+                document.getElementById("m_action").value = "undo1";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+            }
+        }
+
+        function check_act_2() {
+            if (document.getElementById('act2').checked) {
+                window.localStorage.setItem("week5_act2_done", "1");
+                document.getElementById("m_action").value = "do2";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+                $('#row_act2').addClass('animated pulse');
+            } else {
+                window.localStorage.setItem("week5_act2_done", "0");
+                document.getElementById("m_action").value = "undo2";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+            }
+        }
+
+        function check_act_3() {
+            if (document.getElementById('act3').checked) {
+                window.localStorage.setItem("week5_act3_done", "1");
+                document.getElementById("m_action").value = "do3";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+                $('#row_act1').addClass('animated pulse');
+            } else {
+                window.localStorage.setItem("week5_act3_done", "0");
+                document.getElementById("m_action").value = "undo3";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+            }
+        }
+
+        function check_act_4() {
+            if (document.getElementById('act4').checked) {
+                window.localStorage.setItem("week5_act4_done", "1");
+                document.getElementById("m_action").value = "do4";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+                $('#row_act4').addClass('animated pulse');
+            } else {
+                window.localStorage.setItem("week5_act4_done", "0");
+                document.getElementById("m_action").value = "undo4";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+            }
+        }
+
+        // Function for music player
+        var trackMR = document.getElementById("trackMR");
+
+        function trackMRPlay() {
+            if (trackMR.paused) {
+                document.getElementById("m_action").value = "play_MR";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+
+                $('#btn_playMR').prop('disabled', true);
+                $('#btn_pauseMR').prop('disabled', false);
+                $('#btn_stopMR').prop('disabled', false);
+
+                trackMR.play();
+            }
+        }
+
+        function trackMRPause() {
+            if (trackMR.duration > 0 && !trackMR.paused) {
+                document.getElementById("m_action").value = "pause_MR";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+
+                $('#btn_playMR').prop('disabled', false);
+                $('#btn_pauseMR').prop('disabled', true);
+                $('#btn_stopMR').prop('disabled', true);
+
+                trackMR.pause();
+            }
+        }
+
+        function trackMRStop() {
+            if (trackMR.duration > 0 && !trackMR.paused) {
+                document.getElementById("m_action").value = "stop_MR";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+
+                $('#btn_playMR').prop('disabled', false);
+                $('#btn_pauseMR').prop('disabled', true);
+                $('#btn_stopMR').prop('disabled', true);
+
+                trackMR.pause();
+                trackMR.currentTime = 0;
+            }
+        }
+
+        var trackMS = document.getElementById("trackMS");
+        // On track end, mark checkbox as done
+        trackMS.addEventListener("ended",function() {
+            trackMS.pause();
+            trackMS.currentTime = 0;
+            $('#act1').prop('checked', true);
+            $('#btn_playMS').prop('disabled', false);
+            $('#btn_pauseMS').prop('disabled', true);
+            $('#btn_stopMS').prop('disabled', true);
+
+            document.getElementById("m_action").value = "do1";
+            this.sendAction();
+            this.setLogText();
+            document.getElementById("log_btn").click();
+        });
+
+        function trackMSPlay() {
+            if (trackMS.paused) {
+                document.getElementById("m_action").value = "play_MS";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+
+                $('#btn_playMS').prop('disabled', true);
+                $('#btn_pauseMS').prop('disabled', false);
+                $('#btn_stopMS').prop('disabled', false);
+
+                trackMS.play();
+            }
+        }
+
+        function trackMSPause() {
+            if (trackMS.duration > 0 && !trackMS.paused) {
+                document.getElementById("m_action").value = "pause_MS";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+
+                $('#btn_playMS').prop('disabled', false);
+                $('#btn_pauseMS').prop('disabled', true);
+                $('#btn_stopMS').prop('disabled', true);
+
+                trackMS.pause();
+            }
+        }
+
+        function trackMSStop() {
+            if (trackMS.duration > 0 && !trackMS.paused) {
+                document.getElementById("m_action").value = "stop_MS";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+
+                $('#btn_playMS').prop('disabled', false);
+                $('#btn_pauseMS').prop('disabled', true);
+                $('#btn_stopMS').prop('disabled', true);
+
+                trackMS.pause();
+                trackMS.currentTime = 0;
+            }
+        }
+
+        var trackBS = document.getElementById("trackBS");
+        trackBS.currentTime = 240;
+
+        // On track end, mark checkbox as done
+        trackBS.addEventListener("ended",function() {
+            trackBS.pause();
+            trackBS.currentTime = 0;
+            $('#act1').prop('checked', true);
+            $('#btn_playBS').prop('disabled', false);
+            $('#btn_pauseBS').prop('disabled', true);
+            $('#btn_stopBS').prop('disabled', true);
+
+            document.getElementById("m_action").value = "do1";
+            this.sendAction();
+            this.setLogText();
+            document.getElementById("log_btn").click();
+        });
+
+        function trackBSPlay() {
+            if (trackBS.paused) {
+                document.getElementById("m_action").value = "play_BS";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+
+                $('#btn_playBS').prop('disabled', true);
+                $('#btn_pauseBS').prop('disabled', false);
+                $('#btn_stopBS').prop('disabled', false);
+
+                trackBS.play();
+            }
+        }
+
+        function trackBSPause() {
+            if (trackBS.duration > 0 && !trackBS.paused) {
+                document.getElementById("m_action").value = "pause_BS";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+
+                $('#btn_playBS').prop('disabled', false);
+                $('#btn_pauseBS').prop('disabled', true);
+                $('#btn_stopBS').prop('disabled', true);
+
+                trackBS.pause();
+            }
+        }
+
+        function trackBSStop() {
+            if (trackBS.duration > 0 && !trackBS.paused) {
+                document.getElementById("m_action").value = "stop_BS";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+
+                $('#btn_playBS').prop('disabled', false);
+                $('#btn_pauseBS').prop('disabled', true);
+                $('#btn_stopBS').prop('disabled', true);
+
+                trackBS.pause();
+                trackBS.currentTime = 0;
+            }
+        }
+
+        var trackMC = document.getElementById("trackMC");
+        // On track end, mark checkbox as done
+        trackMC.addEventListener("ended",function() {
+            trackMC.pause();
+            trackMC.currentTime = 0;
+            $('#act1').prop('checked', true);
+            $('#btn_playMC').prop('disabled', false);
+            $('#btn_pauseMC').prop('disabled', true);
+            $('#btn_stopMC').prop('disabled', true);
+
+            document.getElementById("m_action").value = "do1";
+            this.sendAction();
+            this.setLogText();
+            document.getElementById("log_btn").click();
+        });
+
+        function trackMCPlay() {
+            if (trackMC.paused) {
+                document.getElementById("m_action").value = "play_MC";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+
+                $('#btn_playMC').prop('disabled', true);
+                $('#btn_pauseMC').prop('disabled', false);
+                $('#btn_stopMC').prop('disabled', false);
+
+                trackMC.play();
+            }
+        }
+
+        function trackMCPause() {
+            if (trackMC.duration > 0 && !trackMC.paused) {
+                document.getElementById("m_action").value = "pause_MC";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+
+                $('#btn_playMC').prop('disabled', false);
+                $('#btn_pauseMC').prop('disabled', true);
+                $('#btn_stopMC').prop('disabled', true);
+
+                trackMC.pause();
+            }
+        }
+
+        function trackMCStop() {
+            if (trackMC.duration > 0 && !trackMC.paused) {
+                document.getElementById("m_action").value = "stop_MC";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+
+                $('#btn_playMC').prop('disabled', false);
+                $('#btn_pauseMC').prop('disabled', true);
+                $('#btn_stopMC').prop('disabled', true);
+
+                trackMC.pause();
+                trackMC.currentTime = 0;
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/txtlog.js"></script>
+
+</body>
+
+</html>

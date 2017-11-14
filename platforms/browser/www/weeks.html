@@ -1,0 +1,104 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <title>MBSR weeks</title>
+    <meta name="description" content="MBSR weeks page">
+    <meta name="author" content="MBSR@ISTC">
+
+    <!-- Include JS libraries -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/js.cookie.js"></script>
+    <script src="js/tools.js"></script>
+
+    <!-- Check if user is logged; otherwise, go to login page -->
+    <script>
+        if (!checkLogin()) {
+            window.location.href = 'index.html';
+        }
+    </script>
+
+</head>
+
+<body onload="check_dates()">
+    <div class="intro container-fluid d-flex justify-content-center">
+        <div class="row">
+            <div class="col">
+                <!-- Heading -->
+                <p></p><h2 class="display-5 font-bold text-center white-text mb-2 animated fadeInRight">SCEGLI UNA SETTIMANA</h2>
+                <div class="ftext-center white-text animated fadeInRight">Sono disponibili per la selezione solo le pagine relative alle settimane già attivate.</div>
+                <br>
+                <p></p>
+
+                <div class="animated fadeInLeft">
+                    <button class="btn btn-primary btn-lg btn-block" id="w1" name="w1" onclick="location.href='weeks_1.html'">Settimana 1</button>
+                    <button class="btn btn-primary btn-lg btn-block" id="w2" name="w2" onclick="location.href='weeks_2.html'">Settimana 2</button>
+                    <button class="btn btn-primary btn-lg btn-block" id="w3" name="w3" onclick="location.href='weeks_3.html'">Settimana 3</button>
+                    <button class="btn btn-primary btn-lg btn-block" id="w4" name="w4" onclick="location.href='weeks_4.html'">Settimana 4</button>
+                    <button class="btn btn-primary btn-lg btn-block" id="w5" name="w5" onclick="location.href='weeks_5.html'">Settimana 5</button>
+                    <button class="btn btn-primary btn-lg btn-block" id="w6" name="w6" onclick="location.href='weeks_6.html'">Settimana 6</button>
+                    <button class="btn btn-primary btn-lg btn-block" id="w7" name="w7" onclick="location.href='weeks_7.html'">Settimana 7</button>
+                    <button class="btn btn-primary btn-lg btn-block" id="w8" name="w8" onclick="location.href='weeks_8.html'">Settimana 8</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function check_dates() {
+            
+            // Check which week is the actual one
+            var now = new Date();
+
+            var weekStart = new Date(window.localStorage.getItem('mbsr_week_2'));            
+            if (Math.ceil((now.getTime() - weekStart.getTime()) / (1000 * 3600 * 24)) < 0) {
+                $('#w2').prop('disabled', true);
+            }
+            var weekStart = new Date(window.localStorage.getItem('mbsr_week_3'));            
+            if (Math.ceil((now.getTime() - weekStart.getTime()) / (1000 * 3600 * 24)) < 0) {
+                $('#w3').prop('disabled', true);
+            }
+            var weekStart = new Date(window.localStorage.getItem('mbsr_week_4'));            
+            if (Math.ceil((now.getTime() - weekStart.getTime()) / (1000 * 3600 * 24)) < 0) {
+                $('#w4').prop('disabled', true);
+            }
+            var weekStart = new Date(window.localStorage.getItem('mbsr_week_5'));
+            if (Math.ceil((now.getTime() - weekStart.getTime()) / (1000 * 3600 * 24)) < 0) {
+                $('#w5').prop('disabled', true);
+            }
+            var weekStart = new Date(window.localStorage.getItem('mbsr_week_6'));
+            if (Math.ceil((now.getTime() - weekStart.getTime()) / (1000 * 3600 * 24)) < 0) {
+                $('#w6').prop('disabled', true);
+            }
+            var weekStart = new Date(window.localStorage.getItem('mbsr_week_7'));
+            if (Math.ceil((now.getTime() - weekStart.getTime()) / (1000 * 3600 * 24)) < 0) {
+                $('#w7').prop('disabled', true);
+            }
+            var weekStart = new Date(window.localStorage.getItem('mbsr_week_8'));
+            if (Math.ceil((now.getTime() - weekStart.getTime()) / (1000 * 3600 * 24)) < 0) {
+                $('#w8').prop('disabled', true);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,176 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>MBSR login</title>
+    <meta name="description" content="MBSR login page">
+    <meta name="author" content="MBSR@ISTC">
+
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/js.cookie.js"></script>
+    <script src="js/tools.js"></script>;   
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="intro container-fluid d-flex justify-content-center">
+        <div class="row d-flex ">
+            <div class="col">
+                <!-- Heading -->
+                <h2 class="display-4 font-bold text-center blue-text  animated fadeInDown">MBSR<span class="white-text display-2">@</span>ISTC</h2>
+                <p><br></p>
+                <!-- Description -->
+                <h4 class="white-text"> Inserisci La tua email e il tuo codice per accedere al materiale del corso.</h4>
+
+                <p><br></p>
+
+                <!-- Form username -->
+                <div class="md-form">
+                    <i class="fa fa-envelope prefix grey-text"></i>
+                    <input class="white-text" type="text" id="i_username" name="i_username" required placeholder="Inserisci la tua email"><p></p>
+                    <i class="fa fa-user prefix grey-text"></i>
+                    <input class="white-text" type="text" id="i_id" name="i_id" required placeholder="Inserisci il tuo codice personale">
+                </div>
+
+                <div class="text-center">
+                    <button class="btn btn-primary" id="login" onclick="registerUser();">Login</button>
+                </div>
+                <!-- Form  -->                
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden form for submit -->
+    <form method="post" id="action_form" name="action_form" action="#">
+        <input type="hidden" id="m_sent" name="m_sent" value="">        
+        <input type="hidden" id="m_id" name="m_id" value="">            
+        <input type="hidden" id="m_username" name="m_username" value="">            
+        <input type="hidden" id="m_action" name="m_action" value="">
+        <input type="hidden" id="m_week" name="m_week" value="0">
+        <input type="hidden" id="m_day" name="m_day" value="0">
+        <input type="hidden" id="m_device" name="m_device" value="app">        
+    </form>
+
+    <!-- Hidden button and text to log data -->
+    <div hidden>
+        <input type="text" id="log_text"/>
+        <button id="log_btn"></button>
+    </div>
+
+    <script>
+
+        function registerUser() {
+            // Save the username
+            window.localStorage.setItem('username', document.getElementById("i_username").value);
+            window.localStorage.setItem('id', document.getElementById("i_id").value);
+
+            // Set the log information
+            document.getElementById("m_id").value = window.localStorage.getItem("id");
+            document.getElementById("m_username").value = window.localStorage.getItem("username");
+            this.sendLog();
+            
+            // Save the last login date
+            var d = new Date();
+            if (window.localStorage.getItem('lastlogin') == null) {
+                window.localStorage.setItem('lastlogin', d);
+            } else {
+                // If a day is passed (at midnight), erase the check status
+                var dlast = new Date(window.localStorage.getItem('lastlogin'));
+                dlast.setHours(00,00,01);
+                if (Math.ceil((d.getTime()-dlast.getTime()) / (1000 * 3600 * 24)) > 1) {
+                    window.localStorage.removeItem('week1_act1_done');
+                    window.localStorage.removeItem('week1_act2_done');
+                    window.localStorage.removeItem('week1_act3_done');
+                    window.localStorage.removeItem('week2_act1_done');
+                    window.localStorage.removeItem('week2_act2_done');
+                    window.localStorage.removeItem('week2_act3_done');
+                    window.localStorage.removeItem('week2_act4_done');
+                    window.localStorage.removeItem('week3_act1_done');
+                    window.localStorage.removeItem('week3_act2_done');
+                    window.localStorage.removeItem('week3_act3_done');
+                    window.localStorage.removeItem('week3_act4_done');
+                    window.localStorage.removeItem('week4_act1_done');
+                    window.localStorage.removeItem('week4_act2_done');
+                    window.localStorage.removeItem('week4_act3_done');
+                    window.localStorage.removeItem('week4_act4_done');
+                    window.localStorage.removeItem('week5_act1_done');
+                    window.localStorage.removeItem('week5_act2_done');
+                    window.localStorage.removeItem('week5_act3_done');
+                    window.localStorage.removeItem('week5_act4_done');
+                    window.localStorage.removeItem('week6_act1_done');
+                    window.localStorage.removeItem('week6_act2_done');
+                    window.localStorage.removeItem('week6_act3_done');
+                    window.localStorage.removeItem('week6_act4_done');
+                    window.localStorage.removeItem('week7_act1_done');
+                    window.localStorage.removeItem('week7_act2_done');
+                    window.localStorage.removeItem('week7_act3_done');
+                    window.localStorage.removeItem('week8_act1_done');
+                    window.localStorage.removeItem('week8_act2_done');
+                    window.localStorage.removeItem('week8_act3_done');                    
+                }
+                window.localStorage.setItem('lastlogin', d);
+            }
+
+            // Set MBSR dates
+            d.setDate(7);d.setMonth(10);d.setYear(2017);
+            d.setHours(15,00,00,0);
+
+            window.localStorage.setItem('mbsr_week_1', d);
+
+            d.setDate(d.getDate() + 7);
+            window.localStorage.setItem('mbsr_week_2', d);
+
+            d.setDate(d.getDate() + 7);
+            window.localStorage.setItem('mbsr_week_3', d);
+
+            d.setDate(d.getDate() + 7);
+            window.localStorage.setItem('mbsr_week_4', d);
+
+            d.setDate(d.getDate() + 7);
+            window.localStorage.setItem('mbsr_week_5', d);
+
+            d.setDate(d.getDate() + 7);
+            window.localStorage.setItem('mbsr_week_6', d);
+
+            d.setDate(d.getDate() + 7);
+            window.localStorage.setItem('mbsr_week_7', d);
+
+            d.setDate(d.getDate() + 7);
+            window.localStorage.setItem('mbsr_week_8', d);
+
+            // Go to weeks page
+            window.location.href = 'weeks.html';
+        }
+
+        function sendLog() {
+            document.getElementById("m_action").value = "login";
+            this.sendAction();
+            this.setLogText();
+            document.getElementById("log_btn").click();
+        }
+
+    </script>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/txtlog.js"></script>
+</body>
+
+</html>
