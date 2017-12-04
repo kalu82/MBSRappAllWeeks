@@ -53,20 +53,22 @@
                     <div class="card-body">
                         
                         <div class="container">
+
                             <div class="row" id="row_act1">
                                 <div class="col">
-                                    <input type="checkbox" name="act1" id="act1" onclick="check_act_1();" autocomplete="off"> Alternativamente, una pratica a scelta senza istruzioni:<br>
+                                    <input type="checkbox" name="act1" id="act1" onclick="check_act_1();" autocomplete="off"> Alternativamente, una pratica a scelta senza istruzioni:<p></p>
                                     <ul class="fa-ul">
-                                        <li><i class="fa-li fa fa-square"></i>Pratica a scelta senza istruzioni (45 min)</li>
-                                        <li><i class="fa-li fa fa-square"></i>Pratica a scelta senza istruzioni (30 min)</li>
-                                        <li><i class="fa-li fa fa-square"></i>Pratica a scelta senza istruzioni (15 min)</li>
-                                    <br><p></p>
-                                    </ul>
+                                        <li><i class="fa-li fa fa-square"></i>Pratica a scelta senza istruzioni (45 min)</li><br>
+                                        <li><i class="fa-li fa fa-square"></i>O uno tra:<p></p></li>
+                                        <ul class="fa-ul">
+                                            <li><i class="fa-li fa fa-minus-square-o"></i>Pratica a scelta senza istruzioni (30 min)</li><br>
+                                            <li><i class="fa-li fa fa-minus-square-o"></i>Pratica a scelta senza istruzioni (15 min)</li><br>
+                                        </ul>
                                 
-                                    <p>Se hai problemi a praticare senza istruzioni, qui trovi le varie pratiche:</p>
+                                    <li><i class="fa-li fa fa-square"></i>Se hai problemi a praticare senza istruzioni, qui trovi le varie pratiche:<p></p>  </li>
                                     
                                     <ul class="fa-ul">
-                                        <li><i class="fa-li fa fa-square"></i>Meditazione sul respiro (15 min)</li>
+                                        <li><i class="fa-li fa fa-minus-square-o"></i>Meditazione sul respiro (13 min)</li>
                                         <li><audio id="trackMR" src="mbsr_tracks/med_resp.mp3" type = "audio/mp3">Your browser does not support HTML5 audio.</audio>
                                             <div class="btn-group">
                                                 <button class="btn btn-blue" id="btn_playMR" onclick="trackMRPlay()"><i class="fa fa-play"></i></button>
@@ -75,7 +77,7 @@
                                             </div>
                                         </li><br>
                                             
-                                        <li><i class="fa-li fa fa-square"></i>Meditazione seduta (25 min)</li>
+                                        <li><i class="fa-li fa fa-minus-square-o"></i>Meditazione seduta (25 min)</li>
                                         <li><audio id="trackMS" src="mbsr_tracks/med_sed.mp3" type = "audio/mp3">Your browser does not support HTML5 audio.</audio>
                                             <div class="btn-group">
                                                 <button class="btn btn-blue" id="btn_playMS" onclick="trackMSPlay()"><i class="fa fa-play"></i></button>
@@ -84,7 +86,7 @@
                                             </div>
                                         </li><br>
                                             
-                                        <li><i class="fa-li fa fa-square"></i>Body scan (30 min)</li>
+                                        <li><i class="fa-li fa fa-minus-square-o"></i>Body scan (30 min)</li>
                                         <li><audio id="trackBS" src="mbsr_tracks/body_scan.mp3" type = "audio/mp3">Your browser does not support HTML5 audio.</audio>
                                             <div class="btn-group">
                                                 <button class="btn btn-blue" id="btn_playBS" onclick="trackBSPlay()"><i class="fa fa-play"></i></button>
@@ -93,7 +95,7 @@
                                             </div>
                                         </li><br>
                                             
-                                        <li><i class="fa-li fa fa-square"></i>Movimento consapevole (40 min)</li>
+                                        <li><i class="fa-li fa fa-minus-square-o"></i>Movimento consapevole (40 min)</li>
                                         <li><audio id="trackMC" src="mbsr_tracks/mov_cons.mp3" type = "audio/mp3">Your browser does not support HTML5 audio.</audio>
                                             <div class="btn-group">
                                                 <button class="btn btn-blue" id="btn_playMC" onclick="trackMCPlay()"><i class="fa fa-play"></i></button>

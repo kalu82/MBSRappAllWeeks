@@ -1,0 +1,11 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "MBSR_app_allweeks",
+  "short_name": "MBSR_app_allweeks",
+  "version": "com.mbsrapp_allweeks",
+  "description": "MBSR app with all weeks available.",
+  "author": "Luca Simione",
+  "icons": [],
+  "start_url": "index.html"
+}

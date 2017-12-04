@@ -55,7 +55,7 @@
                         <div class="container">
                             <div class="row" id="row_act1">
                                 <div class="col">
-                                    <input type="checkbox" name="act1" id="act1" onclick="check_act_1();" autocomplete="off"> Alterna le seguenti (una pratica al giorno):<br>
+                                    <input type="checkbox" name="act1" id="act1" onclick="check_act_1();" autocomplete="off"> Alterna (una pratica al giorno):<br>
                                     <p></p>
                                     
                                     <ul class="fa-ul">
@@ -68,22 +68,27 @@
                                             </div>
                                         </li><br>
                                         
-                                        <li><i class="fa-li fa fa-square"></i>Body scan (30 min)</li>
-                                        <li><audio id="trackBS" src="mbsr_tracks/body_scan.mp3" type = "audio/mp3">Your browser does not support HTML5 audio.</audio>
-                                            <div class="btn-group">
-                                                <button class="btn btn-blue" id="btn_playBS" onclick="trackBSPlay()"><i class="fa fa-play"></i></button>
-                                                <button class="btn btn-yellow" id="btn_pauseBS" onclick="trackBSPause()" disabled><i class="fa fa-pause"></i></button>
-                                                <button class="btn btn-red" id="btn_stopBS" onclick="trackBSStop()" disabled><i class="fa fa-stop"></i></button>
-                                            </div>
-                                        </li><br>
-                                        
-                                        <li><i class="fa-li fa fa-square"></i>Movimento consapevole (40 min)</li>
-                                        <li><audio id="trackMC" src="mbsr_tracks/mov_cons.mp3" type = "audio/mp3">Your browser does not support HTML5 audio.</audio>
-                                            <div class="btn-group">
-                                                <button class="btn btn-blue" id="btn_playMC" onclick="trackMCPlay()"><i class="fa fa-play"></i></button>
-                                                <button class="btn btn-yellow" id="btn_pauseMC" onclick="trackMCPause()" disabled><i class="fa fa-pause"></i></button>
-                                                <button class="btn btn-red" id="btn_stopMC" onclick="trackMCStop()" disabled><i class="fa fa-stop"></i></button>
-                                            </div>
+                                        <li><i class="fa-li fa fa-square"></i>O uno tra:<p></p></li>
+                                        <li>
+                                            <ul class="fa-ul">
+                                                <li><i class="fa-li fa fa-minus-square-o"></i>Body scan (30 min)</li>
+                                                <li><audio id="trackBS" src="mbsr_tracks/body_scan.mp3" type = "audio/mp3">Your browser does not support HTML5 audio.</audio>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-blue" id="btn_playBS" onclick="trackBSPlay()"><i class="fa fa-play"></i></button>
+                                                        <button class="btn btn-yellow" id="btn_pauseBS" onclick="trackBSPause()" disabled><i class="fa fa-pause"></i></button>
+                                                        <button class="btn btn-red" id="btn_stopBS" onclick="trackBSStop()" disabled><i class="fa fa-stop"></i></button>
+                                                    </div>
+                                                </li><br>
+                                                
+                                                <li><i class="fa-li fa fa-minus-square-o"></i>Movimento consapevole (40 min)</li>
+                                                <li><audio id="trackMC" src="mbsr_tracks/mov_cons.mp3" type = "audio/mp3">Your browser does not support HTML5 audio.</audio>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-blue" id="btn_playMC" onclick="trackMCPlay()"><i class="fa fa-play"></i></button>
+                                                        <button class="btn btn-yellow" id="btn_pauseMC" onclick="trackMCPause()" disabled><i class="fa fa-pause"></i></button>
+                                                        <button class="btn btn-red" id="btn_stopMC" onclick="trackMCStop()" disabled><i class="fa fa-stop"></i></button>
+                                                    </div>
+                                                </li>
+                                            </ul>
                                         </li>
                                     </ul>
                                 </div>

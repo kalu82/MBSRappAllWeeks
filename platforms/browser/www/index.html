@@ -103,10 +103,12 @@
                     window.localStorage.removeItem('week2_act2_done');
                     window.localStorage.removeItem('week2_act3_done');
                     window.localStorage.removeItem('week2_act4_done');
+                    window.localStorage.removeItem('week2_act5_done');
                     window.localStorage.removeItem('week3_act1_done');
                     window.localStorage.removeItem('week3_act2_done');
                     window.localStorage.removeItem('week3_act3_done');
                     window.localStorage.removeItem('week3_act4_done');
+                    window.localStorage.removeItem('week3_act5_done');
                     window.localStorage.removeItem('week4_act1_done');
                     window.localStorage.removeItem('week4_act2_done');
                     window.localStorage.removeItem('week4_act3_done');
@@ -131,7 +133,7 @@
 
             // Set MBSR dates
             d.setDate(7);d.setMonth(10);d.setYear(2017);
-            d.setHours(15,00,00,0);
+            d.setHours(22,00,00,0);
 
             window.localStorage.setItem('mbsr_week_1', d);
 
@@ -153,7 +155,7 @@
             d.setDate(d.getDate() + 7);
             window.localStorage.setItem('mbsr_week_7', d);
 
-            d.setDate(d.getDate() + 7);
+            d.setDate(d.getDate() + 8);
             window.localStorage.setItem('mbsr_week_8', d);
 
             // Go to weeks page

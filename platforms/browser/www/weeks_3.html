@@ -84,7 +84,7 @@
                                     
                             <div class="row" id="row_act2">
                                 <div class="col">
-                                    <input type="checkbox" name="act2" id="act2" onclick="check_act_2();" autocomplete="off"> Meditazione sul respiro (15 minuti)<br>
+                                    <input type="checkbox" name="act2" id="act2" onclick="check_act_2();" autocomplete="off"> Meditazione sul respiro (13 minuti)<br>
                                     <audio id="trackMR" src="mbsr_tracks/med_resp.mp3" type = "audio/mp3">Your browser does not support HTML5 audio.</audio>
                                     <div class="btn-group">
                                         <button class="btn btn-blue" id="btn_playMR" onclick="trackMRPlay()"><i class="fa fa-play"></i></button>
@@ -105,6 +105,13 @@
                             <div class="row" id="row_act4">
                                 <div class="col">
                                     <input type="checkbox" name="act4" id="act4" onclick="check_act_4();" autocomplete="off"> Calendario degli eventi spiacevoli<p></p>
+                                </div>
+                            </div>
+
+                            <div class="row" id="row_act5">
+                                <div class="col">
+                                    <input type="checkbox" name="act5" id="act5" onclick="check_act_5();" autocomplete="off"> Consapevolezza del ‘Pilota automatico’ (nota in quali circostanze entra in
+                                    azione)<p></p>
                                 </div>
                             </div>
                         </div>
@@ -200,6 +207,10 @@
             if (window.localStorage.getItem("week3_act4_done") == "1") {
                 $('#act4').prop('checked', true);
                 $('#row_act4').addClass('animated pulse');
+            }
+            if (window.localStorage.getItem("week3_act5_done") == "1") {
+                $('#act5').prop('checked', true);
+                $('#row_act5').addClass('animated pulse');
             }
         }
 
@@ -313,6 +324,23 @@
             } else {
                 window.localStorage.setItem("week3_act4_done", "0");
                 document.getElementById("m_action").value = "undo4";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+            }
+        }
+
+        function check_act_5() {
+            if (document.getElementById('act5').checked) {
+                window.localStorage.setItem("week3_act5_done", "1");
+                document.getElementById("m_action").value = "do5";
+                this.sendAction();
+                this.setLogText();
+                document.getElementById("log_btn").click();
+                $('#row_act5').addClass('animated pulse');
+            } else {
+                window.localStorage.setItem("week3_act5_done", "0");
+                document.getElementById("m_action").value = "undo5";
                 this.sendAction();
                 this.setLogText();
                 document.getElementById("log_btn").click();
