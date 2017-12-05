@@ -1,5 +1,3 @@
-import { currentId } from "async_hooks";
-
 // Wait for Cordova to load
 document.addEventListener("deviceready", onDeviceReady, false);
 
