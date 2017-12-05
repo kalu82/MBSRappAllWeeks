@@ -1,6 +1,5 @@
-import { currentId } from "async_hooks";
-
 // Wait for Cordova to load
+var currentRow = 0;
 document.addEventListener("deviceready", onDeviceReady, false);
 
 // Cordova is ready
@@ -17,13 +16,25 @@ function errorCB(err) {
     alert("Error processing SQL: " + err.code);
 }
 
+function successCB() {
+}
+
 function insertDB(tx) {
     tx.executeSql('INSERT INTO tbl_actions (id, username, action, week, day, device, date) VALUES ("' + document.getElementById("m_id").value + '","' + document.getElementById("m_username").value + '","' + document.getElementById("m_action").value + '","' + document.getElementById("m_week").value + '","' + document.getElementById("m_day").value + '","' + document.getElementById("m_device").value + '","' + new Date().toString + '")');
+}
+
+function deleteRow(tx) {
+    tx.executeSql('DELETE FROM tbl_actions WHERE rownum = ' + currentRow, [], successCB, errorCB);
 }
 
 function goInsert() {
     var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
     db.transaction(insertDB, errorCB);
+}
+
+function goDelete() {
+    var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
+    db.transaction(deleteRow, errorCB);
 }
 
 function sendDB() {
@@ -38,14 +49,14 @@ function queryDB(tx) {
 function querySuccess(tx, results) {
     var len = results.rows.length;
     for (var i = 0; i < len; i++) {
-        document.getElementById("m_sent").value = "1"
-        document.getElementById("m_id").value = results.rows.item(i).id
-        document.getElementById("m_username").value = results.rows.item(i).username
-        document.getElementById("m_action").value = results.rows.item(i).action
-        document.getElementById("m_week").value = results.rows.item(i).week
-        document.getElementById("m_day").value = results.rows.item(i).day
-        document.getElementById("m_device").value = results.rows.item(i).device
-        document.getElementById("m_date").value = results.rows.item(i).device
+        document.getElementById("m_sent").value = "1";
+        document.getElementById("m_id").value = results.rows.item(i).id;
+        document.getElementById("m_username").value = results.rows.item(i).username;
+        document.getElementById("m_action").value = results.rows.item(i).action;
+        document.getElementById("m_week").value = results.rows.item(i).week;
+        document.getElementById("m_day").value = results.rows.item(i).day;
+        document.getElementById("m_device").value = results.rows.item(i).device;
+        document.getElementById("m_date").value = results.rows.item(i).device;
         
         var form_data = new FormData(document.getElementById("action_form"));
         $.ajax({
@@ -68,7 +79,8 @@ function querySuccess(tx, results) {
         document.getElementById("m_sent").value = "1";
 
         // Remove the line after upload
-        tx.executeSql('DELETE FROM tbl_actions WHERE rownum = ' + results.rows.item(i).rownum, [], , errorCB);
+        currentRow = results.rows.item(i).rownum;
+        this.goDelete();
     }
 }
 
@@ -127,7 +139,7 @@ function sendAction() {
         return 1;
     } else {
         // write data on the internal DB
-        this.insertDB();
+        this.goInsert();
 
         document.getElementById("m_sent").value = "0";
         return 0;
