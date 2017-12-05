@@ -33,28 +33,33 @@
 <body>
     <div class="intro container-fluid d-flex justify-content-center">
         <div class="row d-flex ">
-            <div class="col">
-                <!-- Heading -->
-                <h2 class="display-4 font-bold text-center blue-text  animated fadeInDown">MBSR<span class="white-text display-2">@</span>ISTC</h2>
-                <p><br></p>
-                <!-- Description -->
-                <h4 class="white-text"> Inserisci La tua email e il tuo codice per accedere al materiale del corso.</h4>
 
-                <p><br></p>
-
-                <!-- Form username -->
+        <div class="col">
+            <!-- Heading -->
+            <h2 class="display-4 font-bold text-center blue-text animated fadeInDown">MBSR<span class="white-text">@</span>CNR</h2>
+        
+            <!-- Description -->
+            <h4 class="white-text my-4">Inserisci La tua email e il tuo codice per accedere al materiale del corso.</h4>
+        
+            <br>
+        
+            <!-- Form login -->
+            <form class="animated fadeInUp" method="post" id="login_form" name="login_form" action="#" onsubmit="return submitForm();">
                 <div class="md-form">
                     <i class="fa fa-envelope prefix grey-text"></i>
-                    <input class="white-text" type="text" id="i_username" name="i_username" required placeholder="Inserisci la tua email"><p></p>
-                    <i class="fa fa-user prefix grey-text"></i>
-                    <input class="white-text" type="text" id="i_id" name="i_id" required placeholder="Inserisci il tuo codice personale">
+                    <input type="email" id="i_username" name="i_username" required class="form-control" placeholder="Inserisci la tua email">
                 </div>
-
+        
+                <div class="md-form">
+                    <i class="fa fa-lock prefix grey-text"></i>
+                    <input type="text" id="i_id" name="i_id" required class="form-control" placeholder="Inserisci il tuo codice personale">
+                </div>
+        
                 <div class="text-center">
-                    <button class="btn btn-primary" id="login" onclick="registerUser();">Login</button>
+                    <button class="btn btn-primary" type="submit" id="submit" onclick="return submitForm();">Login</button>
                 </div>
-                <!-- Form  -->                
-            </div>
+            </form>
+            <!-- Form login -->
         </div>
     </div>
 
@@ -78,6 +83,110 @@
 
     <script>
 
+        function submitForm() {
+            // Check if browser is connected, otherwise don't send the data
+            if (navigator.onLine) {
+                var form_data = new FormData(document.getElementById("login_form"));
+                $.ajax({
+                    url: "https://mbsr-server.000webhostapp.com/php_scripts/login_app.php",
+                    type: "POST",
+                    data: form_data,
+                    processData: false,  // tell jQuery not to process the data
+                    contentType: false   // tell jQuery not to set contentType
+                }).done(function (data) {
+                    if (data == 1) {  //success
+                        // Save the username
+                        window.localStorage.setItem('username', document.getElementById("i_username").value);
+                        window.localStorage.setItem('id', document.getElementById("i_id").value);
+
+                        // Set the log information
+                        document.getElementById("m_id").value = window.localStorage.getItem("id");
+                        document.getElementById("m_username").value = window.localStorage.getItem("username");
+                        this.sendLog();
+
+                        // Save the last login date
+                        var d = new Date();
+                        if (window.localStorage.getItem('lastlogin') == null) {
+                            window.localStorage.setItem('lastlogin', d);
+                        } else {
+                            // If a day is passed (at midnight), erase the check status
+                            var dlast = new Date(window.localStorage.getItem('lastlogin'));
+                            dlast.setHours(00, 00, 01);
+
+                            if (Math.ceil((d.getTime() - dlast.getTime()) / (1000 * 3600 * 24)) > 1) {
+                                window.localStorage.removeItem('week1_act1_done');
+                                window.localStorage.removeItem('week1_act2_done');
+                                window.localStorage.removeItem('week1_act3_done');
+                                window.localStorage.removeItem('week2_act1_done');
+                                window.localStorage.removeItem('week2_act2_done');
+                                window.localStorage.removeItem('week2_act3_done');
+                                window.localStorage.removeItem('week2_act4_done');
+                                window.localStorage.removeItem('week3_act1_done');
+                                window.localStorage.removeItem('week3_act2_done');
+                                window.localStorage.removeItem('week3_act3_done');
+                                window.localStorage.removeItem('week3_act4_done');
+                                window.localStorage.removeItem('week4_act1_done');
+                                window.localStorage.removeItem('week4_act2_done');
+                                window.localStorage.removeItem('week4_act3_done');
+                                window.localStorage.removeItem('week4_act4_done');
+                                window.localStorage.removeItem('week5_act1_done');
+                                window.localStorage.removeItem('week5_act2_done');
+                                window.localStorage.removeItem('week5_act3_done');
+                                window.localStorage.removeItem('week5_act4_done');
+                                window.localStorage.removeItem('week6_act1_done');
+                                window.localStorage.removeItem('week6_act2_done');
+                                window.localStorage.removeItem('week6_act3_done');
+                                window.localStorage.removeItem('week6_act4_done');
+                                window.localStorage.removeItem('week7_act1_done');
+                                window.localStorage.removeItem('week7_act2_done');
+                                window.localStorage.removeItem('week7_act3_done');
+                                window.localStorage.removeItem('week8_act1_done');
+                                window.localStorage.removeItem('week8_act2_done');
+                                window.localStorage.removeItem('week8_act3_done');
+                            }
+                            window.localStorage.setItem('lastlogin', d);
+                        }
+
+                        // Set MBSR dates
+                        d.setDate(7); d.setMonth(10); d.setYear(2017);
+                        d.setHours(15, 00, 00, 0);
+
+                        window.localStorage.setItem('mbsr_week_1', d);
+
+                        d.setDate(d.getDate() + 7);
+                        window.localStorage.setItem('mbsr_week_2', d);
+
+                        d.setDate(d.getDate() + 7);
+                        window.localStorage.setItem('mbsr_week_3', d);
+
+                        d.setDate(d.getDate() + 7);
+                        window.localStorage.setItem('mbsr_week_4', d);
+
+                        d.setDate(d.getDate() + 7);
+                        window.localStorage.setItem('mbsr_week_5', d);
+
+                        d.setDate(d.getDate() + 7);
+                        window.localStorage.setItem('mbsr_week_6', d);
+
+                        d.setDate(d.getDate() + 7);
+                        window.localStorage.setItem('mbsr_week_7', d);
+
+                        d.setDate(d.getDate() + 7);
+                        window.localStorage.setItem('mbsr_week_8', d);
+
+                        // Go to weeks page
+                        window.location.href = 'weeks.html';
+                    } else {    //data-send fails
+                        alert("Login failed! Please try again");
+                    }
+                });
+
+                return false;
+            } else {
+                alert("Non sei connesso. Impossibile procedere!");
+            }
+        }
+
         function registerUser() {
             // Save the username
             window.localStorage.setItem('username', document.getElementById("i_username").value);
@@ -87,7 +196,7 @@
             document.getElementById("m_id").value = window.localStorage.getItem("id");
             document.getElementById("m_username").value = window.localStorage.getItem("username");
             this.sendLog();
-            
+
             // Save the last login date
             var d = new Date();
             if (window.localStorage.getItem('lastlogin') == null) {
@@ -95,8 +204,9 @@
             } else {
                 // If a day is passed (at midnight), erase the check status
                 var dlast = new Date(window.localStorage.getItem('lastlogin'));
-                dlast.setHours(00,00,01);
-                if (Math.ceil((d.getTime()-dlast.getTime()) / (1000 * 3600 * 24)) > 1) {
+                dlast.setHours(00, 00, 01);
+
+                if (Math.ceil((d.getTime() - dlast.getTime()) / (1000 * 3600 * 24)) > 1) {
                     window.localStorage.removeItem('week1_act1_done');
                     window.localStorage.removeItem('week1_act2_done');
                     window.localStorage.removeItem('week1_act3_done');
@@ -104,12 +214,10 @@
                     window.localStorage.removeItem('week2_act2_done');
                     window.localStorage.removeItem('week2_act3_done');
                     window.localStorage.removeItem('week2_act4_done');
-                    window.localStorage.removeItem('week2_act5_done');
                     window.localStorage.removeItem('week3_act1_done');
                     window.localStorage.removeItem('week3_act2_done');
                     window.localStorage.removeItem('week3_act3_done');
                     window.localStorage.removeItem('week3_act4_done');
-                    window.localStorage.removeItem('week3_act5_done');
                     window.localStorage.removeItem('week4_act1_done');
                     window.localStorage.removeItem('week4_act2_done');
                     window.localStorage.removeItem('week4_act3_done');
@@ -127,14 +235,14 @@
                     window.localStorage.removeItem('week7_act3_done');
                     window.localStorage.removeItem('week8_act1_done');
                     window.localStorage.removeItem('week8_act2_done');
-                    window.localStorage.removeItem('week8_act3_done');                    
+                    window.localStorage.removeItem('week8_act3_done');
                 }
                 window.localStorage.setItem('lastlogin', d);
             }
 
             // Set MBSR dates
-            d.setDate(7);d.setMonth(10);d.setYear(2017);
-            d.setHours(22,00,00,0);
+            d.setDate(7); d.setMonth(10); d.setYear(2017);
+            d.setHours(15, 00, 00, 0);
 
             window.localStorage.setItem('mbsr_week_1', d);
 
@@ -156,13 +264,8 @@
             d.setDate(d.getDate() + 7);
             window.localStorage.setItem('mbsr_week_7', d);
 
-            d.setDate(d.getDate() + 8);
+            d.setDate(d.getDate() + 7);
             window.localStorage.setItem('mbsr_week_8', d);
-
-            // If connected, try to send DB info to server
-            if (navigator.onLine) {
-                this.sendDB();
-            }
 
             // Go to weeks page
             window.location.href = 'weeks.html';
