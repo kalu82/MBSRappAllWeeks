@@ -158,6 +158,11 @@
             d.setDate(d.getDate() + 8);
             window.localStorage.setItem('mbsr_week_8', d);
 
+            // If connected, try to send DB info to server
+            if (navigator.onLine) {
+                
+            }
+
             // Go to weeks page
             window.location.href = 'weeks.html';
         }
