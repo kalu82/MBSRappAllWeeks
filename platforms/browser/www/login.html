@@ -62,16 +62,19 @@
     <script>
         document.addEventListener('deviceready', onDeviceReady, false);
         var logOb;
+        var logM;
 
         function onDeviceReady() {
             window.alert("got main dir");
             window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function (dir) {
                 console.log("got main dir", dir);
                 dir.getFile("log.txt", { create: true }, function (file) {
-                    window.alert("got the file", file);
+                    window.alert("got the file" + file);
                     logOb = file;
                 });
             });
+            
+            
         }
 
         function loginFunction() {
