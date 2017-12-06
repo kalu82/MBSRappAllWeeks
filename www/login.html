@@ -71,7 +71,16 @@
 
                         reader.onloadend = function () {
                             window.alert("Successful file read: " + this.result);
-                            //displayFileData(fileEntry.fullPath + ": " + this.result);
+
+                            // By lines
+                            var lines = this.result.split('\n');
+                            for (var line = 0; line < lines.length; line++) {
+                                // By tabs
+                                var tabs = lines[line].split('\t');
+                                for (var tab = 0; tab < tabs.length; tab++) {
+                                    window.alert(tabs[tab]);
+                                }
+                            }
                         };
 
                         reader.readAsText(file);
