@@ -87,7 +87,7 @@
             if (window.localStorage.getItem("id") != null) {
                 document.getElementById("i_id").value = window.localStorage.getItem("id");
                 document.getElementById("i_username").value = window.localStorage.getItem("username");
-                //window.location.href = 'login.html';
+                window.location.href = 'login.html';
             }
         }
 
@@ -110,9 +110,9 @@
                         var d = new Date(data);
                         d.setHours(22, 00, 00, 0);
                         window.localStorage.setItem('mbsr_week_1', d);
-                        window.alert(new Date(window.localStorage.getItem('mbsr_week_1')));
+
                         // Go to weeks page
-                        //window.location.href = 'login.html';
+                        window.location.href = 'loginFirst.html';
                     } else {    //data-send fails
                         alert("Login failed! Please try again");
                     }

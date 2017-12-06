@@ -12,7 +12,6 @@
     <meta name="author" content="MBSR@ISTC">
 
     <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/d3.js"></script>
     <script src="js/tools.js"></script>;   
     
     <!-- Font Awesome -->
@@ -142,7 +141,7 @@
                 var dlast = new Date(window.localStorage.getItem('lastlogin'));
                 dlast.setHours(00, 00, 01);
 
-                if (Math.ceil((d.getTime() - dlast.getTime()) / (1000 * 3600 * 24)) > 1) {
+                if ((d.getTime() - dlast.getTime()) / (1000 * 3600 * 24) > 1) {
                     window.localStorage.removeItem('week1_act1_done');
                     window.localStorage.removeItem('week1_act2_done');
                     window.localStorage.removeItem('week1_act3_done');
@@ -177,10 +176,7 @@
             }
 
             // Set MBSR dates
-            d.setDate(7); d.setMonth(10); d.setYear(2017);
-            d.setHours(15, 00, 00, 0);
-
-            window.localStorage.setItem('mbsr_week_1', d);
+            d = new Date(window.localStorage.getItem('mbsr_week_1'));
 
             d.setDate(d.getDate() + 7);
             window.localStorage.setItem('mbsr_week_2', d);

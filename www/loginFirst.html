@@ -73,7 +73,7 @@
                                     // By tabs
                                     var tabs = lines[line].split('\t');
 
-                                    // Send only data not sent already
+                                    // Send ALL data the first time login
                                     document.getElementById("m_id").value = window.localStorage.getItem("id").toString();
                                     document.getElementById("m_username").value = window.localStorage.getItem("username").toString();
                                     document.getElementById("m_action").value = tabs[3].replace(' ', '');
@@ -174,10 +174,7 @@
             }
 
             // Set MBSR dates
-            d.setDate(7); d.setMonth(10); d.setYear(2017);
-            d.setHours(15, 00, 00, 0);
-
-            window.localStorage.setItem('mbsr_week_1', d);
+            d = new Date(window.localStorage.getItem('mbsr_week_1'));
 
             d.setDate(d.getDate() + 7);
             window.localStorage.setItem('mbsr_week_2', d);
