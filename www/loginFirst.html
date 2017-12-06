@@ -65,13 +65,14 @@
                             var reader = new FileReader();
 
                             reader.onloadend = function () {
-                                //window.alert("Successful file read: " + this.result);
 
                                 // Send the text lines to server
                                 var lines = this.result.split('\n');
                                 for (var line = 0; line < lines.length; line++) {
                                     // By tabs
                                     var tabs = lines[line].split('\t');
+
+                                    window.alert(tabs);
 
                                     // Send ALL data the first time login
                                     document.getElementById("m_id").value = window.localStorage.getItem("id").toString();
