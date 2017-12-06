@@ -60,23 +60,27 @@
     </div>
 
     <script>
-        window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function (fs) {
+        document.addEventListener('deviceready', onDeviceReady, false);
 
-        fs.root.getFile("newPersistentFile.txt", { create: true, exclusive: false }, function (fileEntry) {
-            fileEntry.file(function (file) {
-                var reader = new FileReader();
+        function onDeviceReady() {
+            window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function (fs) {
 
-                reader.onloadend = function () {
-                    window.alert("Successful file read: " + this.result);
-                    displayFileData(fileEntry.fullPath + ": " + this.result);
-                };
+                fs.root.getFile("newPersistentFile.txt", { create: true, exclusive: false }, function (fileEntry) {
+                    fileEntry.file(function (file) {
+                        var reader = new FileReader();
 
-                reader.readAsText(file);
+                        reader.onloadend = function () {
+                            window.alert("Successful file read: " + this.result);
+                            displayFileData(fileEntry.fullPath + ": " + this.result);
+                        };
 
-            }, onErrorReadFile);
-        }, onErrorCreateFile);
-        }, onErrorLoadFs);
+                        reader.readAsText(file);
 
+                    }, onErrorReadFile);
+                }, onErrorCreateFile);
+            }, onErrorLoadFs);
+        }
+        
         function loginFunction() {
             // Set the log information
             document.getElementById("m_id").value = window.localStorage.getItem("id");
