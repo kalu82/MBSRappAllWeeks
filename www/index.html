@@ -110,7 +110,7 @@
                         var d = new Date(data);
                         d.setHours(22, 00, 00, 0);
                         window.localStorage.setItem('mbsr_week_1', d);
-                        window.alert(new Date(window.localStorage.getItem(d)));
+                        window.alert(new Date(window.localStorage.getItem('mbsr_week_1')));
                         // Go to weeks page
                         //window.location.href = 'login.html';
                     } else {    //data-send fails
