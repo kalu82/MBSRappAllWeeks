@@ -57,12 +57,16 @@
 
         function onDeviceReady() {
             if (navigator.onLine) {
-                window.alert("Try to send data");
 
                 window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function (dir) {
 
+                    window.alert("Try to send data1");
+
                     dir.getFile("log.txt", { create: true }, function (fileEntry) {
                         fileEntry.file(function (file) {
+
+                            window.alert("Try to send data2");
+
                             var reader = new FileReader();
 
                             reader.onloadend = function () {
