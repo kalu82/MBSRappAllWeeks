@@ -68,11 +68,10 @@
             window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function (dir) {
                 console.log("got main dir", dir);
                 dir.getFile("log.txt", { create: true }, function (file) {
-                    console.log("got the file", file);
+                    window.alert("got the file", file);
                     logOb = file;
                 });
             });
-            window.alert(logOb);
         }
 
         function loginFunction() {
