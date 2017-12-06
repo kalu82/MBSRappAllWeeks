@@ -102,8 +102,7 @@
                     processData: false,  // tell jQuery not to process the data
                     contentType: false   // tell jQuery not to set contentType
                 }).done(function (data) {
-                    window.alert(data);
-                    if (data > 0) {  //success
+                    if (data != 0) {  //success
                         // Save the username
                         window.localStorage.setItem('username', document.getElementById("i_username").value);
                         window.localStorage.setItem('id', document.getElementById("i_id").value);
