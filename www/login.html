@@ -29,7 +29,7 @@
 
 </head>
 
-<body onload="loginFunction();">
+<body onload="setTimeout(loginFunction(),1000);">
     <div class="intro container-fluid d-flex justify-content-center">
         <div class="row d-flex ">
 
@@ -127,7 +127,7 @@
             // Go to weeks page
             window.location.href = 'weeks.html';
 
-            
+
             // Set the log information
             document.getElementById("m_id").value = window.localStorage.getItem("id");
             document.getElementById("m_username").value = window.localStorage.getItem("username");
