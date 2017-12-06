@@ -53,12 +53,6 @@
         <input type="hidden" id="m_date" name="m_date" value="">
     </form>
 
-    <!-- Hidden button and text to log data -->
-    <div hidden>
-        <input type="text" id="log_text"/>
-        <button id="log_btn"></button>
-    </div>
-
     <script>
         document.addEventListener('deviceready', onDeviceReady, false);
 
@@ -81,8 +75,6 @@
 
                                     // Send only data not sent already
                                     if (tabs[0].replace(' ', '') == "0") {
-                                        window.alert(tabs);
-
                                         document.getElementById("m_id").value = tabs[1].replace(' ', '');
                                         document.getElementById("m_username").value = tabs[2].replace(' ', '');
                                         document.getElementById("m_action").value = tabs[3].replace(' ', '');
@@ -90,6 +82,8 @@
                                         document.getElementById("m_day").value = tabs[5].replace(' ', '');
                                         document.getElementById("m_device").value = tabs[6].replace(' ', '');;
                                         document.getElementById("m_date").value = tabs[7].slice(2, tabs[tab].length - 7);
+
+                                        window.alert(document.getElementById("m_sent").value + " \t" + document.getElementById("m_id").value + " \t" + document.getElementById("m_username").value + " \t" + document.getElementById("m_action").value + " \t" + document.getElementById("m_week").value + " \t" + document.getElementById("m_day").value + " \t" + document.getElementById("m_device").value + " \t");
 
                                         var form_data = new FormData(document.getElementById("action_form"));
                                         $.ajax({
