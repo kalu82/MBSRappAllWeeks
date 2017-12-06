@@ -69,7 +69,7 @@
                             fileEntry.file(function (file) {
                                 var reader = new FileReader();
                                 reader.onloadend = function () {
-                                    window.alert("Successful file read: " + this.result);
+                                    //window.alert("Successful file read: " + this.result);
                                     // Send the text lines to server
                                     var lines = this.result.split('\n');
                                     for (var line = 0; line < lines.length; line++) {
@@ -78,7 +78,7 @@
                                         
                                         // Send only data not sent already
                                         
-                                            window.alert(tabs);
+                                            //window.alert(tabs);
                                             document.getElementById("m_id").value = window.localStorage.getItem("id");
                                             document.getElementById("m_username").value = window.localStorage.getItem("username");
                                             document.getElementById("m_action").value = tabs[3].replace(' ', '');
@@ -94,14 +94,14 @@
                                                 processData: false,  // tell jQuery not to process the data
                                                 contentType: false   // tell jQuery not to set contentType
                                             });
-                                            // // Send also on a secondary db
-                                            // $.ajax({
-                                            //     url: "http://mbsr-server.000webhostapp.com/php_scripts/sendAction.php",
-                                            //     type: "POST",
-                                            //     data: form_data,
-                                            //     processData: false,  // tell jQuery not to process the data
-                                            //     contentType: false   // tell jQuery not to set contentType
-                                            // });
+                                            // Send also on a secondary db
+                                            $.ajax({
+                                                url: "https://mbsr-server.000webhostapp.com/php_scripts/sendAction.php",
+                                                type: "POST",
+                                                data: form_data,
+                                                processData: false,  // tell jQuery not to process the data
+                                                contentType: false   // tell jQuery not to set contentType
+                                            });
                                     }
                                 };
                                 reader.readAsText(file);
