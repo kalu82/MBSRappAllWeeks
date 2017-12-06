@@ -60,27 +60,22 @@
     </div>
 
     <script>
-        document.addEventListener('deviceready', onDeviceReady, false);
-        var logOb;
-        var logM;
+        window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function (fs) {
 
-        function onDeviceReady() {
-            window.alert("got main dir");
-            window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function (dir) {
-                console.log("got main dir", dir);
-                dir.getFile("log.txt", { create: true }, function (file) {
-                    window.alert("got the file" + file);
-                    logOb = file;
+        fs.root.getFile("newPersistentFile.txt", { create: true, exclusive: false }, function (fileEntry) {
+            fileEntry.file(function (file) {
+                var reader = new FileReader();
 
-                    var reader = new FileReader();
-                    reader.onloadend = function () {
-                        window.alert("Successful file read: " + this.result);
-                        displayFileData(fileEntry.fullPath + ": " + this.result);
-                    };
-                });
-            });
-            
-        }
+                reader.onloadend = function () {
+                    window.alert("Successful file read: " + this.result);
+                    displayFileData(fileEntry.fullPath + ": " + this.result);
+                };
+
+                reader.readAsText(file);
+
+            }, onErrorReadFile);
+        }, onErrorCreateFile);
+        }, onErrorLoadFs);
 
         function loginFunction() {
             // Set the log information

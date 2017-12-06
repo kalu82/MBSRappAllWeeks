@@ -67,7 +67,6 @@
         function onDeviceReady() {
             window.alert("got main dir");
             window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function (dir) {
-                console.log("got main dir", dir);
                 dir.getFile("log.txt", { create: true }, function (file) {
                     window.alert("got the file" + file);
                     logOb = file;
