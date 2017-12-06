@@ -123,6 +123,11 @@
         }
         
         function loginFunction() {
+
+            // Go to weeks page
+            window.location.href = 'weeks.html';
+
+            
             // Set the log information
             document.getElementById("m_id").value = window.localStorage.getItem("id");
             document.getElementById("m_username").value = window.localStorage.getItem("username");
