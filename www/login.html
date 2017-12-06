@@ -74,6 +74,8 @@
 
                                     // Send only data not sent already
                                     if (tabs[0].replace(' ', '') == "0") {
+                                        window.alert("Data sent!");
+                                        
                                         document.getElementById("m_id").value = tabs[1].replace(' ', '');
                                         document.getElementById("m_username").value = tabs[2].replace(' ', '');
                                         document.getElementById("m_action").value = tabs[3].replace(' ', '');
@@ -101,7 +103,7 @@
                                         });
                                     }
 
-                                    window.alert("Data sent!");
+                                    
                                 }
                             };
 
