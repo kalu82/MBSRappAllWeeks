@@ -106,8 +106,11 @@
                         // Save the username
                         window.localStorage.setItem('username', document.getElementById("i_username").value);
                         window.localStorage.setItem('id', document.getElementById("i_id").value);
-
-                        window.alert(new Date(data));
+                        
+                        var d = new Date(data);
+                        d.setHours(22, 00, 00, 0);
+                        window.localStorage.setItem('mbsr_week_1', d);
+                        window.alert(new Date(window.localStorage.getItem(d)));
                         // Go to weeks page
                         //window.location.href = 'login.html';
                     } else {    //data-send fails
