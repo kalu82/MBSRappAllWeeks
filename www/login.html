@@ -30,13 +30,14 @@
 
 </head>
 
-<body onload="loginFunction();">
+<body>
     <div class="intro container-fluid d-flex justify-content-center">
         <div class="row d-flex ">
 
             <div class="col">
                 <!-- Heading -->
-                <h4 class="white-text my-4">Login in corso...</h4>
+                <h4 id="textH" class="white-text my-4">Login in corso...</h4>
+                <button class="btn btn-primary" id="goOn" onclick="loginFunction();" disabled>Continua</button>
 
             </div>
         </div>
@@ -108,6 +109,9 @@
                         });
                     });
                 }
+
+                document.getElementById("textH").textContent = "Puoi proseguire!";
+                $('#goOn').prop('disabled', false);
             }
 
             function loginFunction() {
