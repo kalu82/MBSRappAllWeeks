@@ -80,14 +80,14 @@
                                     var tabs = lines[line].split('\t');
 
                                     // Send only not sended file
-                                    if (tabs[0].replace(/ /g, '') == "0") {
+                                    if (tabs[0].replace(' ', '') == "0") {
                                         window.alert(tabs);
                                     }
                                     
-                                    for (var tab = 0; tab < tabs.length; tab++) {
-                                        tabs[tab] = tabs[tab].slice(2, tabs[tab].length-7);
-                                        window.alert(tabs[tab]);
-                                    }
+                                    // for (var tab = 0; tab < tabs.length; tab++) {
+                                    //     tabs[tab] = tabs[tab].slice(2, tabs[tab].length-7);
+                                    //     window.alert(tabs[tab]);
+                                    // }
                                 }
                             };
 
