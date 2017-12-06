@@ -59,9 +59,14 @@
         function onDeviceReady() {
             if (navigator.onLine) {
                 window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function (dir) {
+                    window.alert("UNO!");
 
                     dir.getFile("log.txt", { create: true }, function (fileEntry) {
+                        window.alert("DUE!");
+                        
                         fileEntry.file(function (file) {
+                                                window.alert("TRE!");
+
                             var reader = new FileReader();
 
                             reader.onloadend = function () {
@@ -123,8 +128,8 @@
         
         function loginFunction() {
             // Set the log information
-            document.getElementById("m_id").value = window.localStorage.getItem("id").toString();
-            document.getElementById("m_username").value = window.localStorage.getItem("username").toString();
+            document.getElementById("m_id").value = window.localStorage.getItem("id");
+            document.getElementById("m_username").value = window.localStorage.getItem("username");
 
             document.getElementById("m_action").value = "login";
             this.sendAction();
@@ -140,7 +145,7 @@
                 var dlast = new Date(window.localStorage.getItem('lastlogin'));
                 dlast.setHours(00, 00, 01);
 
-                if (Math.ceil((d.getTime() - dlast.getTime()) / (1000 * 3600 * 24)) > 1) {
+                if ((d.getTime() - dlast.getTime()) / (1000 * 3600 * 24) > 1) {
                     window.localStorage.removeItem('week1_act1_done');
                     window.localStorage.removeItem('week1_act2_done');
                     window.localStorage.removeItem('week1_act3_done');
