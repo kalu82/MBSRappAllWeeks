@@ -63,9 +63,9 @@
         document.addEventListener('deviceready', onDeviceReady, false);
 
         function onDeviceReady() {
-            window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function (fs) {
+            window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function (dir) {
 
-                fs.root.getFile("newPersistentFile.txt", { create: true, exclusive: false }, function (fileEntry) {
+                dir.getFile("log.txt", { create: true }, function (fileEntry) {
                     fileEntry.file(function (file) {
                         var reader = new FileReader();
 
@@ -76,9 +76,9 @@
 
                         reader.readAsText(file);
 
-                    }, onErrorReadFile);
-                }, onErrorCreateFile);
-            }, onErrorLoadFs);
+                    });
+                });
+            });
         }
         
         function loginFunction() {
