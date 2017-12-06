@@ -63,38 +63,35 @@
         document.addEventListener('deviceready', onDeviceReady, false);
 
         function onDeviceReady() {
-            window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function (dir) {
+            if (navigator.onLine) {
+                window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function (dir) {
 
-                dir.getFile("log.txt", { create: true }, function (fileEntry) {
-                    fileEntry.file(function (file) {
-                        var reader = new FileReader();
+                    dir.getFile("log.txt", { create: true }, function (fileEntry) {
+                        fileEntry.file(function (file) {
+                            var reader = new FileReader();
 
-                        reader.onloadend = function () {
-                            window.alert("Successful file read: " + this.result);
+                            reader.onloadend = function () {
+                                window.alert("Successful file read: " + this.result);
 
-                            // By lines
-                            var lines = this.result.split('\n');
-                            for (var line = 0; line < lines.length; line++) {
-                                // By tabs
-                                var tabs = lines[line].split('\t');
-                                for (var tab = 0; tab < tabs.length; tab++) {
-                                    
+                                // Send the text lines to server
+                                var lines = this.result.split('\n');
+                                for (var line = 0; line < lines.length; line++) {
+                                    // By tabs
+                                    var tabs = lines[line].split('\t');
+                                    for (var tab = 0; tab < tabs.length; tab++) {
+                                        tabs[tab].replace('[','');
+                                        tabs[tab].replace(']','');
+                                        window.alert(tabs[tab]);
+                                    }
                                 }
-                                window.alert(tabs);
-                            }
-                        };
+                            };
 
-                        reader.readAsText(file);
+                            reader.readAsText(file);
 
+                        });
                     });
                 });
-            });
-
-            this.sendAdvice;
-        }
-
-        function sendAdvice() {
-            window.alert("PROVA!!!");
+            }
         }
         
         function loginFunction() {
@@ -102,10 +99,10 @@
             document.getElementById("m_id").value = window.localStorage.getItem("id");
             document.getElementById("m_username").value = window.localStorage.getItem("username");
 
-            // document.getElementById("m_action").value = "login";
-            // this.sendAction();
-            // this.setLogText();
-            // document.getElementById("log_btn").click();
+            document.getElementById("m_action").value = "login";
+            this.sendAction();
+            this.setLogText();
+            document.getElementById("log_btn").click();
 
             // Save the last login date
             var d = new Date();
@@ -180,14 +177,6 @@
             // Go to weeks page
             //window.location.href = 'weeks.html';
         }
-
-        function sendLog() {
-            document.getElementById("m_action").value = "login";
-            this.sendAction();
-            this.setLogText();
-            document.getElementById("log_btn").click();
-        }
-
 
     </script>
 
