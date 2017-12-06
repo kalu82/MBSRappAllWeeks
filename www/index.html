@@ -107,7 +107,7 @@
                         window.localStorage.setItem('username', document.getElementById("i_username").value);
                         window.localStorage.setItem('id', document.getElementById("i_id").value);
 
-                        window.alert(data);
+                        window.alert(new Date(data).toString);
                         // Go to weeks page
                         //window.location.href = 'login.html';
                     } else {    //data-send fails
