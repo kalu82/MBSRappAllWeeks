@@ -30,7 +30,7 @@
 
 </head>
 
-<body>
+<body onload="checkLogin();">
     <div class="intro container-fluid d-flex justify-content-center">
         <div class="row d-flex ">
 
@@ -82,12 +82,15 @@
     </div>
 
     <script>
-        // Set the log information if already inserted
-        if (window.localStorage.getItem("id") != null) {
-            document.getElementById("i_id").value = window.localStorage.getItem("id");
-            document.getElementById("i_username").value = window.localStorage.getItem("username");
+        function checkLogin() {
+            // Set the log information if already inserted
+            if (window.localStorage.getItem("id") != null) {
+                document.getElementById("i_id").value = window.localStorage.getItem("id");
+                document.getElementById("i_username").value = window.localStorage.getItem("username");
+                window.location.href = 'login.html';
+            }
         }
-        
+
         function submitForm() {
             // Check if browser is connected, otherwise don't send the data
             if (navigator.onLine) {
@@ -99,13 +102,14 @@
                     processData: false,  // tell jQuery not to process the data
                     contentType: false   // tell jQuery not to set contentType
                 }).done(function (data) {
-                    if (data == 1) {  //success
+                    if (data > 0) {  //success
                         // Save the username
                         window.localStorage.setItem('username', document.getElementById("i_username").value);
                         window.localStorage.setItem('id', document.getElementById("i_id").value);
 
+                        window.alert(data);
                         // Go to weeks page
-                        window.location.href = 'login.html';
+                        //window.location.href = 'login.html';
                     } else {    //data-send fails
                         alert("Login failed! Please try again");
                     }
