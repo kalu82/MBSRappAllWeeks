@@ -51,9 +51,6 @@ function sendAction() {
 
         return 1;
     } else {
-        // write data on the internal DB
-        this.goInsert();
-
         document.getElementById("m_sent").value = "0";
         return 0;
     }
