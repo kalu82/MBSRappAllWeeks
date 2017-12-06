@@ -78,8 +78,9 @@
                                 // By tabs
                                 var tabs = lines[line].split('\t');
                                 for (var tab = 0; tab < tabs.length; tab++) {
-                                    window.alert(tabs[tab]);
+                                    
                                 }
+                                window.alert(tabs);
                             }
                         };
 
@@ -88,6 +89,12 @@
                     });
                 });
             });
+
+            this.sendAdvice;
+        }
+
+        function sendAdvice() {
+            window.alert("PROVA!!!");
         }
         
         function loginFunction() {
