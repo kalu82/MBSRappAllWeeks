@@ -55,21 +55,14 @@
 
     <script>
         document.addEventListener('deviceready', onDeviceReady, false);
-
         function onDeviceReady() {
             if (navigator.onLine) {
                 window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function (dir) {
-                    window.alert("UNO!");
-
                     dir.getFile("log.txt", { create: true }, function (fileEntry) {
-                        window.alert("DUE!");
-                        
                         fileEntry.file(function (file) {
-                                                window.alert("TRE!");
-
                             var reader = new FileReader();
-
                             reader.onloadend = function () {
+                                window.alert("Successful file read: " + this.result);document.addEventListener('deviceready', onDeviceReady, false);
 
                                 // Send the text lines to server
                                 var lines = this.result.split('\n');
