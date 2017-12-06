@@ -12,7 +12,7 @@
     <meta name="author" content="MBSR@ISTC">
 
     <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/js.cookie.js"></script>
+    <script src="js/d3.js"></script>
     <script src="js/tools.js"></script>;   
     
     <!-- Font Awesome -->
@@ -46,13 +46,13 @@
             <!-- Form login -->
             <form class="animated fadeInUp" method="post" id="login_form" name="login_form" action="#" onsubmit="return submitForm();">
                 <div class="md-form">
-                    <i class="fa fa-envelope prefix grey-text"></i>
-                    <input type="email" id="i_username" name="i_username" required class="form-control" placeholder="Inserisci la tua email">
+                    <i class="fa fa-envelope prefix white-text"></i>
+                    <input class="white-text" type="email" id="i_username" name="i_username" required class="form-control" placeholder="Inserisci la tua email">
                 </div>
         
                 <div class="md-form">
-                    <i class="fa fa-lock prefix grey-text"></i>
-                    <input type="text" id="i_id" name="i_id" required class="form-control" placeholder="Inserisci il tuo codice personale">
+                    <i class="fa fa-lock prefix white-text"></i>
+                    <input class="white-text" type="text" id="i_id" name="i_id" required class="form-control" placeholder="Inserisci il tuo codice personale">
                 </div>
         
                 <div class="text-center">
@@ -82,7 +82,12 @@
     </div>
 
     <script>
-
+        // Set the log information if already inserted
+        if (window.localStorage.getItem("id") != null) {
+            document.getElementById("i_id").value = window.localStorage.getItem("id");
+            document.getElementById("i_username").value = window.localStorage.getItem("username");
+        }
+        
         function submitForm() {
             // Check if browser is connected, otherwise don't send the data
             if (navigator.onLine) {
@@ -99,83 +104,8 @@
                         window.localStorage.setItem('username', document.getElementById("i_username").value);
                         window.localStorage.setItem('id', document.getElementById("i_id").value);
 
-                        // Set the log information
-                        document.getElementById("m_id").value = window.localStorage.getItem("id");
-                        document.getElementById("m_username").value = window.localStorage.getItem("username");
-                        this.sendLog();
-
-                        // Save the last login date
-                        var d = new Date();
-                        if (window.localStorage.getItem('lastlogin') == null) {
-                            window.localStorage.setItem('lastlogin', d);
-                        } else {
-                            // If a day is passed (at midnight), erase the check status
-                            var dlast = new Date(window.localStorage.getItem('lastlogin'));
-                            dlast.setHours(00, 00, 01);
-
-                            if (Math.ceil((d.getTime() - dlast.getTime()) / (1000 * 3600 * 24)) > 1) {
-                                window.localStorage.removeItem('week1_act1_done');
-                                window.localStorage.removeItem('week1_act2_done');
-                                window.localStorage.removeItem('week1_act3_done');
-                                window.localStorage.removeItem('week2_act1_done');
-                                window.localStorage.removeItem('week2_act2_done');
-                                window.localStorage.removeItem('week2_act3_done');
-                                window.localStorage.removeItem('week2_act4_done');
-                                window.localStorage.removeItem('week3_act1_done');
-                                window.localStorage.removeItem('week3_act2_done');
-                                window.localStorage.removeItem('week3_act3_done');
-                                window.localStorage.removeItem('week3_act4_done');
-                                window.localStorage.removeItem('week4_act1_done');
-                                window.localStorage.removeItem('week4_act2_done');
-                                window.localStorage.removeItem('week4_act3_done');
-                                window.localStorage.removeItem('week4_act4_done');
-                                window.localStorage.removeItem('week5_act1_done');
-                                window.localStorage.removeItem('week5_act2_done');
-                                window.localStorage.removeItem('week5_act3_done');
-                                window.localStorage.removeItem('week5_act4_done');
-                                window.localStorage.removeItem('week6_act1_done');
-                                window.localStorage.removeItem('week6_act2_done');
-                                window.localStorage.removeItem('week6_act3_done');
-                                window.localStorage.removeItem('week6_act4_done');
-                                window.localStorage.removeItem('week7_act1_done');
-                                window.localStorage.removeItem('week7_act2_done');
-                                window.localStorage.removeItem('week7_act3_done');
-                                window.localStorage.removeItem('week8_act1_done');
-                                window.localStorage.removeItem('week8_act2_done');
-                                window.localStorage.removeItem('week8_act3_done');
-                            }
-                            window.localStorage.setItem('lastlogin', d);
-                        }
-
-                        // Set MBSR dates
-                        d.setDate(7); d.setMonth(10); d.setYear(2017);
-                        d.setHours(15, 00, 00, 0);
-
-                        window.localStorage.setItem('mbsr_week_1', d);
-
-                        d.setDate(d.getDate() + 7);
-                        window.localStorage.setItem('mbsr_week_2', d);
-
-                        d.setDate(d.getDate() + 7);
-                        window.localStorage.setItem('mbsr_week_3', d);
-
-                        d.setDate(d.getDate() + 7);
-                        window.localStorage.setItem('mbsr_week_4', d);
-
-                        d.setDate(d.getDate() + 7);
-                        window.localStorage.setItem('mbsr_week_5', d);
-
-                        d.setDate(d.getDate() + 7);
-                        window.localStorage.setItem('mbsr_week_6', d);
-
-                        d.setDate(d.getDate() + 7);
-                        window.localStorage.setItem('mbsr_week_7', d);
-
-                        d.setDate(d.getDate() + 7);
-                        window.localStorage.setItem('mbsr_week_8', d);
-
                         // Go to weeks page
-                        window.location.href = 'weeks.html';
+                        window.location.href = 'login.html';
                     } else {    //data-send fails
                         alert("Login failed! Please try again");
                     }
@@ -187,96 +117,13 @@
             }
         }
 
-        function registerUser() {
-            // Save the username
-            window.localStorage.setItem('username', document.getElementById("i_username").value);
-            window.localStorage.setItem('id', document.getElementById("i_id").value);
-
-            // Set the log information
-            document.getElementById("m_id").value = window.localStorage.getItem("id");
-            document.getElementById("m_username").value = window.localStorage.getItem("username");
-            this.sendLog();
-
-            // Save the last login date
-            var d = new Date();
-            if (window.localStorage.getItem('lastlogin') == null) {
-                window.localStorage.setItem('lastlogin', d);
-            } else {
-                // If a day is passed (at midnight), erase the check status
-                var dlast = new Date(window.localStorage.getItem('lastlogin'));
-                dlast.setHours(00, 00, 01);
-
-                if (Math.ceil((d.getTime() - dlast.getTime()) / (1000 * 3600 * 24)) > 1) {
-                    window.localStorage.removeItem('week1_act1_done');
-                    window.localStorage.removeItem('week1_act2_done');
-                    window.localStorage.removeItem('week1_act3_done');
-                    window.localStorage.removeItem('week2_act1_done');
-                    window.localStorage.removeItem('week2_act2_done');
-                    window.localStorage.removeItem('week2_act3_done');
-                    window.localStorage.removeItem('week2_act4_done');
-                    window.localStorage.removeItem('week3_act1_done');
-                    window.localStorage.removeItem('week3_act2_done');
-                    window.localStorage.removeItem('week3_act3_done');
-                    window.localStorage.removeItem('week3_act4_done');
-                    window.localStorage.removeItem('week4_act1_done');
-                    window.localStorage.removeItem('week4_act2_done');
-                    window.localStorage.removeItem('week4_act3_done');
-                    window.localStorage.removeItem('week4_act4_done');
-                    window.localStorage.removeItem('week5_act1_done');
-                    window.localStorage.removeItem('week5_act2_done');
-                    window.localStorage.removeItem('week5_act3_done');
-                    window.localStorage.removeItem('week5_act4_done');
-                    window.localStorage.removeItem('week6_act1_done');
-                    window.localStorage.removeItem('week6_act2_done');
-                    window.localStorage.removeItem('week6_act3_done');
-                    window.localStorage.removeItem('week6_act4_done');
-                    window.localStorage.removeItem('week7_act1_done');
-                    window.localStorage.removeItem('week7_act2_done');
-                    window.localStorage.removeItem('week7_act3_done');
-                    window.localStorage.removeItem('week8_act1_done');
-                    window.localStorage.removeItem('week8_act2_done');
-                    window.localStorage.removeItem('week8_act3_done');
-                }
-                window.localStorage.setItem('lastlogin', d);
-            }
-
-            // Set MBSR dates
-            d.setDate(7); d.setMonth(10); d.setYear(2017);
-            d.setHours(15, 00, 00, 0);
-
-            window.localStorage.setItem('mbsr_week_1', d);
-
-            d.setDate(d.getDate() + 7);
-            window.localStorage.setItem('mbsr_week_2', d);
-
-            d.setDate(d.getDate() + 7);
-            window.localStorage.setItem('mbsr_week_3', d);
-
-            d.setDate(d.getDate() + 7);
-            window.localStorage.setItem('mbsr_week_4', d);
-
-            d.setDate(d.getDate() + 7);
-            window.localStorage.setItem('mbsr_week_5', d);
-
-            d.setDate(d.getDate() + 7);
-            window.localStorage.setItem('mbsr_week_6', d);
-
-            d.setDate(d.getDate() + 7);
-            window.localStorage.setItem('mbsr_week_7', d);
-
-            d.setDate(d.getDate() + 7);
-            window.localStorage.setItem('mbsr_week_8', d);
-
-            // Go to weeks page
-            window.location.href = 'weeks.html';
-        }
-
         function sendLog() {
             document.getElementById("m_action").value = "login";
             this.sendAction();
             this.setLogText();
             document.getElementById("log_btn").click();
         }
+
 
     </script>
 
