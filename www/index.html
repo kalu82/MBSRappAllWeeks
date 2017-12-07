@@ -87,6 +87,17 @@
                 document.getElementById("i_id").value = window.localStorage.getItem("id");
                 document.getElementById("i_username").value = window.localStorage.getItem("username");
                 window.location.href = 'login.html';
+
+                window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function (dir) {
+                    dir.getFile("log.txt", { create: true }, function (fileEntry) {
+                        fileEntry.file(function (file) {
+                            var reader = new FileReader();
+                            reader.onloadend = function () {
+                                window.alert("Successful file read: " + this.result);
+                            };
+                        });
+                    });
+                });
             }
         }
 
