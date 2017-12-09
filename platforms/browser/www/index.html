@@ -12,7 +12,6 @@
     <meta name="author" content="MBSR@ISTC">
 
     <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/d3.js"></script>
     <script src="js/tools.js"></script>;   
     
     <!-- Font Awesome -->
@@ -30,7 +29,7 @@
 
 </head>
 
-<body>
+<body onload="checkLogin();">
     <div class="intro container-fluid d-flex justify-content-center">
         <div class="row d-flex ">
 
@@ -82,30 +81,48 @@
     </div>
 
     <script>
-        // Set the log information if already inserted
-        if (window.localStorage.getItem("id") != null) {
-            document.getElementById("i_id").value = window.localStorage.getItem("id");
-            document.getElementById("i_username").value = window.localStorage.getItem("username");
+        function checkLogin() {
+            // Set the log information if already inserted
+            if (window.localStorage.getItem("id") != null) {
+                document.getElementById("i_id").value = window.localStorage.getItem("id");
+                document.getElementById("i_username").value = window.localStorage.getItem("username");
+                window.location.href = 'login.html';
+
+                window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function (dir) {
+                    dir.getFile("log.txt", { create: true }, function (fileEntry) {
+                        fileEntry.file(function (file) {
+                            var reader = new FileReader();
+                            reader.onloadend = function () {
+                                window.alert("Successful file read: " + this.result);
+                            };
+                        });
+                    });
+                });
+            }
         }
-        
+
         function submitForm() {
             // Check if browser is connected, otherwise don't send the data
             if (navigator.onLine) {
                 var form_data = new FormData(document.getElementById("login_form"));
                 $.ajax({
-                    url: "https://mbsr-server.000webhostapp.com/php_scripts/login_app.php",
+                    url: "http://mbsr.x10host.com/php_scripts/login_app.php",
                     type: "POST",
                     data: form_data,
                     processData: false,  // tell jQuery not to process the data
                     contentType: false   // tell jQuery not to set contentType
                 }).done(function (data) {
-                    if (data == 1) {  //success
+                    if (data != 0) {  //success
                         // Save the username
                         window.localStorage.setItem('username', document.getElementById("i_username").value);
                         window.localStorage.setItem('id', document.getElementById("i_id").value);
+                        
+                        var d = new Date(data);
+                        d.setHours(22, 00, 00, 0);
+                        window.localStorage.setItem('mbsr_week_1', d);
 
                         // Go to weeks page
-                        window.location.href = 'login.html';
+                        window.location.href = 'loginFirst.html';
                     } else {    //data-send fails
                         alert("Login failed! Please try again");
                     }

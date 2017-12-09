@@ -1,0 +1,211 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>MBSR login</title>
+    <meta name="description" content="MBSR login page">
+    <meta name="author" content="MBSR@ISTC">
+
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/d3.js"></script>
+    <script src="js/tools.js"></script>;   
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body onload="loginFunction();">
+    <div class="intro container-fluid d-flex justify-content-center">
+        <div class="row d-flex ">
+
+        <div class="col">
+            <!-- Heading -->
+            <h4 class="white-text my-4">Login in corso...</h4>
+
+        </div>
+    </div>
+
+    <!-- Hidden form for submit -->
+    <form method="post" id="action_form" name="action_form" action="#">
+        <input type="hidden" id="m_sent" name="m_sent" value="">        
+        <input type="hidden" id="m_id" name="m_id" value="">            
+        <input type="hidden" id="m_username" name="m_username" value="">            
+        <input type="hidden" id="m_action" name="m_action" value="">
+        <input type="hidden" id="m_week" name="m_week" value="0">
+        <input type="hidden" id="m_day" name="m_day" value="0">
+        <input type="hidden" id="m_device" name="m_device" value="app"> 
+        <input type="hidden" id="m_date" name="m_date" value="">
+    </form>
+
+    <script>
+        document.addEventListener('deviceready', onDeviceReady, false);
+        function onDeviceReady() {
+            if (navigator.onLine) {
+                window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function (dir) {
+                    dir.getFile("log.txt", { create: true }, function (fileEntry) {
+                        fileEntry.file(function (file) {
+                            var reader = new FileReader();
+                            reader.onloadend = function () {
+                                window.alert("Successful file read: " + this.result);
+
+                                // Send the text lines to server
+                                var lines = this.result.split('\n');
+                                for (var line = 0; line < lines.length; line++) {
+                                    // By tabs
+                                    var tabs = lines[line].split('\t');
+
+                                    window.alert(tabs);
+
+                                    // Send ALL data the first time login
+                                    document.getElementById("m_id").value = window.localStorage.getItem("id").toString();
+                                    document.getElementById("m_username").value = window.localStorage.getItem("username").toString();
+                                    document.getElementById("m_action").value = tabs[3].replace(' ', '');
+                                    document.getElementById("m_week").value = tabs[4].replace(' ', '');
+                                    document.getElementById("m_day").value = tabs[5].replace(' ', '');
+                                    document.getElementById("m_device").value = tabs[6].replace(' ', '');;
+                                    document.getElementById("m_date").value = tabs[7].slice(2, tabs[7].length - 7);
+
+                                    window.alert(document.getElementById("m_sent").value + " \t" + document.getElementById("m_id").value + " \t" + document.getElementById("m_username").value + " \t" + document.getElementById("m_action").value + " \t" + document.getElementById("m_week").value + " \t" + document.getElementById("m_day").value + " \t" + document.getElementById("m_device").value + " \t" + document.getElementById("m_date").value);
+
+                                    var form_data = new FormData(document.getElementById("action_form"));
+                                    $.ajax({
+                                        url: "http://mbsr.x10host.com/php_scripts/setAction.php",
+                                        type: "POST",
+                                        data: form_data,
+                                        processData: false,  // tell jQuery not to process the data
+                                        contentType: false   // tell jQuery not to set contentType
+                                    });
+
+                                    // Send also on a secondary db
+                                    $.ajax({
+                                        url: "http://mbsr-server.000webhostapp.com/php_scripts/sendAction.php",
+                                        type: "POST",
+                                        data: form_data,
+                                        processData: false,  // tell jQuery not to process the data
+                                        contentType: false   // tell jQuery not to set contentType
+                                    });
+                                }
+                            };
+
+                            reader.readAsText(file);
+                        });
+
+                        fileEntry.remove(function () {
+                            // The file has been removed succesfully
+                            window.alert("File removed!");
+                        }, function (error) {
+                            // Error deleting the file
+                            window.alert("File not removed! ERR " + error);
+                        }, function () {
+                            // The file doesn't exist
+                            window.alert("File doesn't exist!");
+                        })
+                    });
+                });
+            }
+        }
+        
+        function loginFunction() {
+            // Set the log information
+            document.getElementById("m_id").value = window.localStorage.getItem("id");
+            document.getElementById("m_username").value = window.localStorage.getItem("username");
+
+            document.getElementById("m_action").value = "login";
+            this.sendAction();
+            this.setLogText();
+            document.getElementById("log_btn").click();
+
+            // Save the last login date
+            var d = new Date();
+            if (window.localStorage.getItem('lastlogin') == null) {
+                window.localStorage.setItem('lastlogin', d);
+            } else {
+                // If a day is passed (at midnight), erase the check status
+                var dlast = new Date(window.localStorage.getItem('lastlogin'));
+                dlast.setHours(00, 00, 01);
+
+                if ((d.getTime() - dlast.getTime()) / (1000 * 3600 * 24) > 1) {
+                    window.localStorage.removeItem('week1_act1_done');
+                    window.localStorage.removeItem('week1_act2_done');
+                    window.localStorage.removeItem('week1_act3_done');
+                    window.localStorage.removeItem('week2_act1_done');
+                    window.localStorage.removeItem('week2_act2_done');
+                    window.localStorage.removeItem('week2_act3_done');
+                    window.localStorage.removeItem('week2_act4_done');
+                    window.localStorage.removeItem('week3_act1_done');
+                    window.localStorage.removeItem('week3_act2_done');
+                    window.localStorage.removeItem('week3_act3_done');
+                    window.localStorage.removeItem('week3_act4_done');
+                    window.localStorage.removeItem('week4_act1_done');
+                    window.localStorage.removeItem('week4_act2_done');
+                    window.localStorage.removeItem('week4_act3_done');
+                    window.localStorage.removeItem('week4_act4_done');
+                    window.localStorage.removeItem('week5_act1_done');
+                    window.localStorage.removeItem('week5_act2_done');
+                    window.localStorage.removeItem('week5_act3_done');
+                    window.localStorage.removeItem('week5_act4_done');
+                    window.localStorage.removeItem('week6_act1_done');
+                    window.localStorage.removeItem('week6_act2_done');
+                    window.localStorage.removeItem('week6_act3_done');
+                    window.localStorage.removeItem('week6_act4_done');
+                    window.localStorage.removeItem('week7_act1_done');
+                    window.localStorage.removeItem('week7_act2_done');
+                    window.localStorage.removeItem('week7_act3_done');
+                    window.localStorage.removeItem('week8_act1_done');
+                    window.localStorage.removeItem('week8_act2_done');
+                    window.localStorage.removeItem('week8_act3_done');
+                }
+                window.localStorage.setItem('lastlogin', d);
+            }
+
+            // Set MBSR dates
+            d = new Date(window.localStorage.getItem('mbsr_week_1'));
+
+            d.setDate(d.getDate() + 7);
+            window.localStorage.setItem('mbsr_week_2', d);
+
+            d.setDate(d.getDate() + 7);
+            window.localStorage.setItem('mbsr_week_3', d);
+
+            d.setDate(d.getDate() + 7);
+            window.localStorage.setItem('mbsr_week_4', d);
+
+            d.setDate(d.getDate() + 7);
+            window.localStorage.setItem('mbsr_week_5', d);
+
+            d.setDate(d.getDate() + 7);
+            window.localStorage.setItem('mbsr_week_6', d);
+
+            d.setDate(d.getDate() + 7);
+            window.localStorage.setItem('mbsr_week_7', d);
+
+            d.setDate(d.getDate() + 7);
+            window.localStorage.setItem('mbsr_week_8', d);
+
+            // Go to weeks page
+            window.location.href = 'weeks.html';
+        }
+
+    </script>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/txtlog.js"></script>
+</body>
+
+</html>

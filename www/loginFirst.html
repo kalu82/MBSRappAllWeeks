@@ -62,7 +62,7 @@
                         fileEntry.file(function (file) {
                             var reader = new FileReader();
                             reader.onloadend = function () {
-                                window.alert("Successful file read: " + this.result);document.addEventListener('deviceready', onDeviceReady, false);
+                                window.alert("Successful file read: " + this.result);
 
                                 // Send the text lines to server
                                 var lines = this.result.split('\n');

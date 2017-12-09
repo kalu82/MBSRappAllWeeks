@@ -36,7 +36,19 @@ function sendAction() {
             type: "POST",
             data: form_data,
             processData: false,  // tell jQuery not to process the data
-            contentType: false   // tell jQuery not to set contentType
+            contentType: false,   // tell jQuery not to set contentType
+            success: function (response) {
+                if(response.status === "success") {
+                    window.alert("OK!");
+                    // do something with response.message or whatever other data on success
+                } else if(response.status === "error") {
+                    window.alert("Errore!");
+                    // do something with response.message or whatever other data on error
+                }
+            },
+            error: function(xhr, textStatus, error){
+                window.alert(JSON.stringify(xhr));
+            }
         });
         document.getElementById("m_sent").value = "1";
 
@@ -51,9 +63,6 @@ function sendAction() {
 
         return 1;
     } else {
-        // write data on the internal DB
-        this.goInsert();
-
         document.getElementById("m_sent").value = "0";
         return 0;
     }
