@@ -91,8 +91,8 @@
                 countNum = countNum + 1;
 
                 // Send only data not already in the server db
-                document.getElementById("m_id").value = window.localStorage.getItem("id");
-                document.getElementById("m_username").value = window.localStorage.getItem("username");
+                document.getElementById("m_id").value = tabs[1].replace(' ', '');
+                document.getElementById("m_username").value = tabs[2].replace(' ', '');
                 document.getElementById("m_action").value = tabs[3].replace(' ', '');
                 document.getElementById("m_week").value = tabs[4].replace(' ', '');
                 document.getElementById("m_day").value = tabs[5].replace(' ', '');
