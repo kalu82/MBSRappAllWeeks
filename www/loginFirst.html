@@ -105,6 +105,8 @@
                 }
             }
 
+            window.localStorage.setItem('firstLogin', "1");
+
             setTimeout(function () {
                 loginFunction();
             }, 300*countNum);
