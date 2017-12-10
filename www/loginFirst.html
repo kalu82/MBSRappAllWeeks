@@ -65,6 +65,7 @@
                             var reader = new FileReader();
                             reader.onloadend = sendData;
                             reader.readAsText(file);
+                            logTxt = this.result;
                         });
 
                         fileEntry.remove(function () {
@@ -79,6 +80,10 @@
                         })
                     });
                 });
+            } else {
+                setTimeout(function () {
+                    loginFunction();
+                }, 500);
             }
         }
 
@@ -86,8 +91,9 @@
             var countNum = 1;
 
             // Send the text lines to server
-            logTxt = this.result;
-            window.alert(logTxt);
+            window.alert("ORIGINAL: " + this.result);
+            window.alert("VAR = " + logTxt);
+            
             var lines = logTxt('\n');
             for (var line = 0; line < lines.length; line++) {
                 // By tabs
@@ -170,25 +176,18 @@
 
             // Set MBSR dates
             d = new Date(window.localStorage.getItem('mbsr_week_1'));
-
             d.setDate(d.getDate() + 7);
             window.localStorage.setItem('mbsr_week_2', d);
-
             d.setDate(d.getDate() + 7);
             window.localStorage.setItem('mbsr_week_3', d);
-
             d.setDate(d.getDate() + 7);
             window.localStorage.setItem('mbsr_week_4', d);
-
             d.setDate(d.getDate() + 7);
             window.localStorage.setItem('mbsr_week_5', d);
-
             d.setDate(d.getDate() + 7);
             window.localStorage.setItem('mbsr_week_6', d);
-
             d.setDate(d.getDate() + 7);
             window.localStorage.setItem('mbsr_week_7', d);
-
             d.setDate(d.getDate() + 7);
             window.localStorage.setItem('mbsr_week_8', d);
 
