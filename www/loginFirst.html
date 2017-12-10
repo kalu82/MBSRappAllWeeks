@@ -61,48 +61,7 @@
                     dir.getFile("log.txt", { create: true }, function (fileEntry) {
                         fileEntry.file(function (file) {
                             var reader = new FileReader();
-                            reader.onloadend = function () {
-                                window.alert("Successful file read: " + this.result);
-
-                                // Send the text lines to server
-                                var lines = this.result.split('\n');
-                                for (var line = 0; line < lines.length; line++) {
-                                    // By tabs
-                                    var tabs = lines[line].split('\t');
-
-                                    window.alert(tabs);
-
-                                    // Send ALL data the first time login
-                                    document.getElementById("m_id").value = window.localStorage.getItem("id").toString();
-                                    document.getElementById("m_username").value = window.localStorage.getItem("username").toString();
-                                    document.getElementById("m_action").value = tabs[3].replace(' ', '');
-                                    document.getElementById("m_week").value = tabs[4].replace(' ', '');
-                                    document.getElementById("m_day").value = tabs[5].replace(' ', '');
-                                    document.getElementById("m_device").value = tabs[6].replace(' ', '');;
-                                    document.getElementById("m_date").value = tabs[7].slice(2, tabs[7].length - 7);
-
-                                    window.alert(document.getElementById("m_sent").value + " \t" + document.getElementById("m_id").value + " \t" + document.getElementById("m_username").value + " \t" + document.getElementById("m_action").value + " \t" + document.getElementById("m_week").value + " \t" + document.getElementById("m_day").value + " \t" + document.getElementById("m_device").value + " \t" + document.getElementById("m_date").value);
-
-                                    var form_data = new FormData(document.getElementById("action_form"));
-                                    $.ajax({
-                                        url: "http://mbsr.x10host.com/php_scripts/setAction.php",
-                                        type: "POST",
-                                        data: form_data,
-                                        processData: false,  // tell jQuery not to process the data
-                                        contentType: false   // tell jQuery not to set contentType
-                                    });
-
-                                    // Send also on a secondary db
-                                    $.ajax({
-                                        url: "http://mbsr-server.000webhostapp.com/php_scripts/sendAction.php",
-                                        type: "POST",
-                                        data: form_data,
-                                        processData: false,  // tell jQuery not to process the data
-                                        contentType: false   // tell jQuery not to set contentType
-                                    });
-                                }
-                            };
-
+                            reader.onloadend = sendData;
                             reader.readAsText(file);
                         });
 
@@ -119,8 +78,33 @@
                     });
                 });
             }
+
+            document.getElementById("textH").textContent = "Puoi proseguire!";
+            $('#goOn').prop('disabled', false);
         }
-        
+
+        function sendData() {
+            window.alert("PIPPO - Successful file read: " + this.result);
+            // Send the text lines to server
+            var lines = this.result.split('\n');
+            for (var line = 0; line < lines.length; line++) {
+                // By tabs
+                var tabs = lines[line].split('\t');
+
+                // Send ALL data the first time login
+                document.getElementById("m_id").value = window.localStorage.getItem("id");
+                document.getElementById("m_username").value = window.localStorage.getItem("username");
+                document.getElementById("m_action").value = tabs[3].replace(' ', '');
+                document.getElementById("m_week").value = tabs[4].replace(' ', '');
+                document.getElementById("m_day").value = tabs[5].replace(' ', '');
+                document.getElementById("m_device").value = tabs[6].replace(' ', '');;
+                document.getElementById("m_date").value = tabs[7].slice(2, tabs[7].length - 7);
+
+                var form_data = new FormData(document.getElementById("action_form"));
+                sendAction();        
+            }
+        }
+
         function loginFunction() {
             // Set the log information
             document.getElementById("m_id").value = window.localStorage.getItem("id");
