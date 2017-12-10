@@ -66,13 +66,13 @@
                     dir.getFile("log.txt", { create: true }, function (fileEntry) {
                         fileEntry.remove(function () {
                             // The file has been removed succesfully
-                            window.alert("File removed!");
+                            //window.alert("File removed!");
                         }, function (error) {
                             // Error deleting the file
-                            window.alert("File not removed! ERR " + error);
+                            //window.alert("File not removed! ERR " + error);
                         }, function () {
                             // The file doesn't exist
-                            window.alert("File doesn't exist!");
+                            //window.alert("File doesn't exist!");
                         })
                     });
                 });

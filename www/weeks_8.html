@@ -26,7 +26,6 @@
 
     <!-- Include JS libraries -->
     <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/js.cookie.js"></script>
     <script src="js/tools.js"></script>
 
     <!-- Check if user is logged; otherwise, go to login page -->
@@ -315,7 +314,7 @@
                 this.sendAction();
                 this.setLogText();
                 document.getElementById("log_btn").click();
-                $('#row_act1').addClass('animated pulse');
+                $('#row_act3').addClass('animated pulse');
             } else {
                 window.localStorage.setItem("week8_act3_done", "0");
                 document.getElementById("m_action").value = "undo3";
