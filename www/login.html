@@ -85,7 +85,7 @@
                 // By tabs
                 var tabs = lines[line].split('\t');
 
-                if (tabs[0]=="0") {
+                if (tabs[0].replace(' ', '')=="0") {
                     window.alert(tabs);
                     // Send ALL data the first time login
                     document.getElementById("m_id").value = "ZZZ";
