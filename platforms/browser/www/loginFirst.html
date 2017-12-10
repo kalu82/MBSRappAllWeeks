@@ -61,7 +61,7 @@
                     dir.getFile("log.txt", { create: true }, function (fileEntry) {
                         fileEntry.file(function (file) {
                             var reader = new FileReader();
-                            reader.onloadend = sendData();
+                            reader.onloadend = sendData;
                             reader.readAsText(file);
                         });
 
