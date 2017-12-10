@@ -76,10 +76,19 @@
                         })
                     });
                 });
-                window.location.href = 'weeks.html';
+                setTimeout(function () {
+                    loginFunction();
+                }, 300);
             } else {
-                window.location.href = 'weeks.html';
+                setTimeout(function () {
+                    loginFunction();
+                }, 300);
             }
+        }
+
+        function loginFunction() {
+            // Go to weeks page
+            window.location.href = 'weeks.html';
         }
     </script>
 
