@@ -12,7 +12,6 @@
     <meta name="author" content="MBSR@ISTC">
 
     <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/d3.js"></script>
     <script src="js/tools.js"></script>;   
     
     <!-- Font Awesome -->
@@ -34,24 +33,30 @@
     <div class="intro container-fluid d-flex justify-content-center">
         <div class="row d-flex ">
 
-        <div class="col">
-            <!-- Heading -->
-            <p></p><h4 class="white-text my-4">Login in corso...</h4>
+            <div class="col">
+                <!-- Heading -->
+                <p></p><h4 id="textH" class="white-text my-4">Login in corso...</h4>
+            </div>
+        </div>
 
+        <!-- Hidden form for submit -->
+        <form method="post" id="action_form" name="action_form" action="#">
+            <input type="hidden" id="m_sent" name="m_sent" value="">
+            <input type="hidden" id="m_id" name="m_id" value="">
+            <input type="hidden" id="m_username" name="m_username" value="">
+            <input type="hidden" id="m_action" name="m_action" value="">
+            <input type="hidden" id="m_week" name="m_week" value="0">
+            <input type="hidden" id="m_day" name="m_day" value="0">
+            <input type="hidden" id="m_device" name="m_device" value="app">
+            <input type="hidden" id="m_date" name="m_date" value="">
+        </form>
+
+        <!-- Hidden button and text to log data -->
+        <div hidden>
+            <input type="text" id="log_text" />
+            <button id="log_btn"></button>
         </div>
     </div>
-
-    <!-- Hidden form for submit -->
-    <form method="post" id="action_form" name="action_form" action="#">
-        <input type="hidden" id="m_sent" name="m_sent" value="">        
-        <input type="hidden" id="m_id" name="m_id" value="">            
-        <input type="hidden" id="m_username" name="m_username" value="">            
-        <input type="hidden" id="m_action" name="m_action" value="">
-        <input type="hidden" id="m_week" name="m_week" value="0">
-        <input type="hidden" id="m_day" name="m_day" value="0">
-        <input type="hidden" id="m_device" name="m_device" value="app"> 
-        <input type="hidden" id="m_date" name="m_date" value="">
-    </form>
 
     <script>
         document.addEventListener('deviceready', onDeviceReady, false);
@@ -99,7 +104,7 @@
             }
 
             // This is useful to remove the log file after login
-            //window.localStorage.setItem('firstLogin', 1);
+            window.localStorage.setItem('firstLogin', 1);
 
             setTimeout(function () {
                 loginFunction();
