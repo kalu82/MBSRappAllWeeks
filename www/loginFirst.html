@@ -88,19 +88,21 @@
                 // By tabs
                 var tabs = lines[line].split('\t');
 
-                countNum = countNum + 1;
+                if (tabs[0].replace(' ', '')=="0") {
+                    countNum = countNum + 1;
 
-                // Send only data not already in the server db
-                document.getElementById("m_id").value = tabs[1].replace(' ', '');
-                document.getElementById("m_username").value = tabs[2].replace(' ', '');
-                document.getElementById("m_action").value = tabs[3].replace(' ', '');
-                document.getElementById("m_week").value = tabs[4].replace(' ', '');
-                document.getElementById("m_day").value = tabs[5].replace(' ', '');
-                document.getElementById("m_device").value = tabs[6].replace(' ', '');
-                document.getElementById("m_date").value = tabs[7].slice(2, tabs[7].length - 7);
+                    // Send only data not already in the server db
+                    document.getElementById("m_id").value = tabs[1].replace(' ', '');
+                    document.getElementById("m_username").value = tabs[2].replace(' ', '');
+                    document.getElementById("m_action").value = tabs[3].replace(' ', '');
+                    document.getElementById("m_week").value = tabs[4].replace(' ', '');
+                    document.getElementById("m_day").value = tabs[5].replace(' ', '');
+                    document.getElementById("m_device").value = tabs[6].replace(' ', '');
+                    document.getElementById("m_date").value = tabs[7].slice(2, tabs[7].length - 7);
 
-                var form_data = new FormData(document.getElementById("action_form"));
-                sendAction();
+                    var form_data = new FormData(document.getElementById("action_form"));
+                    sendAction();
+                }
             }
             
             setTimeout(function () {
