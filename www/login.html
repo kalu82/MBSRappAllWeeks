@@ -109,13 +109,6 @@
         }
 
         function loginFunction() {
-            // Set the log information
-            document.getElementById("m_id").value = window.localStorage.getItem("id");
-            document.getElementById("m_username").value = window.localStorage.getItem("username");
-            document.getElementById("m_action").value = "login";
-            this.sendAction();
-            this.setLogText();
-            document.getElementById("log_btn").click();
             // Save the last login date
             var d = new Date();
             if (window.localStorage.getItem('lastlogin') == null) {
@@ -175,6 +168,8 @@
             window.localStorage.setItem('mbsr_week_8', d);
 
             // Set login log
+            document.getElementById("m_id").value = window.localStorage.getItem("id");
+            document.getElementById("m_username").value = window.localStorage.getItem("username");
             document.getElementById("m_week").value = "0";
             document.getElementById("m_day").value = "0";
             document.getElementById("m_device").value = "app";

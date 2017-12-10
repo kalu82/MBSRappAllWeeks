@@ -82,12 +82,12 @@
             for (var line = 0; line < lines.length; line++) {
                 // By tabs
                 var tabs = lines[line].split('\t');
-                
+
                 countNum = countNum + 1;
 
                 // Send only data not already in the server db
-                document.getElementById("m_id").value = "Z4";
-                document.getElementById("m_username").value = "Z4";
+                document.getElementById("m_id").value = "Z5";
+                document.getElementById("m_username").value = "Z5";
                 document.getElementById("m_action").value = tabs[3].replace(' ', '');
                 document.getElementById("m_week").value = tabs[4].replace(' ', '');
                 document.getElementById("m_day").value = tabs[5].replace(' ', '');
@@ -99,7 +99,7 @@
             }
 
             // This is useful to remove the log file after login
-            window.localStorage.setItem('firstLogin', "1");
+            window.localStorage.setItem('firstLogin', 1);
 
             setTimeout(function () {
                 loginFunction();
@@ -107,15 +107,6 @@
         }
 
         function loginFunction() {
-            // Set the log information
-            document.getElementById("m_id").value = window.localStorage.getItem("id");
-            document.getElementById("m_username").value = window.localStorage.getItem("username");
-
-            document.getElementById("m_action").value = "login";
-            this.sendAction();
-            this.setLogText();
-            document.getElementById("log_btn").click();
-
             // Save the last login date
             var d = new Date();
             if (window.localStorage.getItem('lastlogin') == null) {
@@ -177,6 +168,8 @@
             window.localStorage.setItem('mbsr_week_8', d);
 
             // Set login log
+            document.getElementById("m_id").value = window.localStorage.getItem("id");
+            document.getElementById("m_username").value = window.localStorage.getItem("username");
             document.getElementById("m_week").value = "0";
             document.getElementById("m_day").value = "0";
             document.getElementById("m_device").value = "app";
