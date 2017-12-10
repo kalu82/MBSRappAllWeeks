@@ -12,8 +12,8 @@
     <meta name="author" content="MBSR@ISTC">
 
     <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/tools.js"></script>;   
-    
+    <script src="js/tools.js"></script>;
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/font-awesome.css">
@@ -29,7 +29,7 @@
 
 </head>
 
-<body onload="loginFunction();">
+<body>
     <div class="intro container-fluid d-flex justify-content-center">
         <div class="row d-flex ">
 
@@ -92,8 +92,8 @@
                     countNum = countNum + 1;
 
                     // Send only data not already in the server db
-                    document.getElementById("m_id").value = "Z6";
-                    document.getElementById("m_username").value = "Z6";
+                    document.getElementById("m_id").value = "Z4";
+                    document.getElementById("m_username").value = "Z4";
                     document.getElementById("m_action").value = tabs[3].replace(' ', '');
                     document.getElementById("m_week").value = tabs[4].replace(' ', '');
                     document.getElementById("m_day").value = tabs[5].replace(' ', '');
@@ -108,10 +108,6 @@
             setTimeout(function () {
                 loginFunction();
             }, 300*countNum);
-
-            // This is useful to remove the log file after login
-            window.localStorage.setItem('firstLogin', 1);
-            window.alert("First login=" + window.localStorage.getItem('firstLogin');
         }
 
         function loginFunction() {
@@ -187,7 +183,6 @@
             // Go to weeks page
             window.location.href = 'weeks.html';
         }
-
     </script>
 
     <script type="text/javascript" src="cordova.js"></script>
