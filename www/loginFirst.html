@@ -54,6 +54,8 @@
     </form>
 
     <script>
+        var logTxt;
+
         document.addEventListener('deviceready', onDeviceReady, false);
         function onDeviceReady() {
             if (navigator.onLine) {
@@ -62,7 +64,7 @@
                         fileEntry.file(function (file) {
                             var reader = new FileReader();
                             reader.onloadend = sendData;
-                            reader.readAsText(file);
+                            logTxt = reader.readAsText(file);
                         });
 
                         fileEntry.remove(function () {
@@ -84,7 +86,8 @@
             var countNum = 1;
 
             // Send the text lines to server
-            var lines = this.result.split('\n');
+            window.alert(logTxt);
+            var lines = logTxt('\n');
             for (var line = 0; line < lines.length; line++) {
                 // By tabs
                 var tabs = lines[line].split('\t');
