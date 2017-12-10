@@ -64,7 +64,7 @@
                         fileEntry.file(function (file) {
                             var reader = new FileReader();
                             reader.onloadend = sendData;
-                            logTxt = reader.readAsText(file);
+                            reader.readAsText(file);
                         });
 
                         fileEntry.remove(function () {
@@ -86,6 +86,7 @@
             var countNum = 1;
 
             // Send the text lines to server
+            logTxt = this.result;
             window.alert(logTxt);
             var lines = logTxt('\n');
             for (var line = 0; line < lines.length; line++) {
