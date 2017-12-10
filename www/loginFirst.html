@@ -67,17 +67,6 @@
                             reader.readAsText(file);
                             logTxt = this.result;
                         });
-
-                        fileEntry.remove(function () {
-                            // The file has been removed succesfully
-                            window.alert("File removed!");
-                        }, function (error) {
-                            // Error deleting the file
-                            window.alert("File not removed! ERR " + error);
-                        }, function () {
-                            // The file doesn't exist
-                            window.alert("File doesn't exist!");
-                        })
                     });
                 });
             } else {
@@ -191,6 +180,21 @@
             d.setDate(d.getDate() + 7);
             window.localStorage.setItem('mbsr_week_8', d);
 
+            // Remove the log file
+            window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function (dir) {
+                    dir.getFile("log.txt", { create: true }, function (fileEntry) {
+                        fileEntry.remove(function () {
+                            // The file has been removed succesfully
+                            window.alert("File removed!");
+                        }, function (error) {
+                            // Error deleting the file
+                            window.alert("File not removed! ERR " + error);
+                        }, function () {
+                            // The file doesn't exist
+                            window.alert("File doesn't exist!");
+                        })
+                    });
+                });
             // Go to weeks page
             window.location.href = 'weeks.html';
         }
