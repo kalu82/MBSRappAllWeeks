@@ -35,7 +35,7 @@
 
             <div class="col">
                 <!-- Heading -->
-                <p></p><h4 id="textH" class="white-text my-4">REMOVE LOG...</h4>
+                <p></p><h4 id="textH" class="white-text my-4">Remove log file...</h4>
             </div>
         </div>
 
@@ -76,16 +76,10 @@
                         })
                     });
                 });
+                window.location.href = 'weeks.html';
             } else {
-                setTimeout(function () {
-                    loginFunction();
-                }, 100);
+                window.location.href = 'weeks.html';
             }
-        }
-
-        function loginFunction() {
-            // Go to weeks page
-            window.location.href = 'weeks.html';
         }
     </script>
 
