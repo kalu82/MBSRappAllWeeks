@@ -82,7 +82,7 @@
     <script>
         document.addEventListener('deviceready', onDeviceReady, false);
         function onDeviceReady() {
-            window.alert("First login=" + window.localStorage.getItem('firstLogin');
+            
             if (window.localStorage.getItem("firstLogin") != null) {
                 window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function (dir) {
                     dir.getFile("log.txt", { create: true }, function (fileEntry) {
@@ -104,6 +104,7 @@
         }
 
         function check_dates() {
+            window.alert("First login=" + window.localStorage.getItem('firstLogin');
             // // Check which week is the actual one
             // var now = new Date();
 
