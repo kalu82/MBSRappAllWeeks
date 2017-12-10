@@ -105,6 +105,18 @@
         }
 
         function check_dates() {
+            window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, function (dir) {
+                dir.getFile("log.txt", {create: false}, function (fileEntry) {
+                    fileEntry.remove(function (file) {
+                        alert("fichier supprimer");
+                    }, function () {
+                        alert("erreur suppression " + error.code);
+                    }, function () {
+                        alert("fichier n'existe pas");
+                    });
+                });
+            });
+
             // // Check which week is the actual one
             // var now = new Date();
 
