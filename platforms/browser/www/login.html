@@ -64,7 +64,7 @@
                     dir.getFile("log.txt", { create: true }, function (fileEntry) {
                         fileEntry.file(function (file) {
                             var reader = new FileReader();
-                            reader.onloadend = sendData;
+                            reader.onloadend = sendData();
                             reader.readAsText(file);
                         });
                     });
@@ -74,6 +74,8 @@
 
         function sendData() {
             //window.alert("Successful file read: " + this.result);
+            var countNum = 1;
+
             // Send the text lines to server
             var lines = this.result.split('\n');
             for (var line = 0; line < lines.length; line++) {
@@ -81,11 +83,11 @@
                 var tabs = lines[line].split('\t');
 
                 if (tabs[0].replace(' ', '')=="0") {
-                    //window.alert(tabs);
+                    countNum = countNum + 1;
 
                     // Send only data not already in the server db
-                    document.getElementById("m_id").value = "Z3";
-                    document.getElementById("m_username").value = "Z3";
+                    document.getElementById("m_id").value = "Z4";
+                    document.getElementById("m_username").value = "Z4";
                     document.getElementById("m_action").value = tabs[3].replace(' ', '');
                     document.getElementById("m_week").value = tabs[4].replace(' ', '');
                     document.getElementById("m_day").value = tabs[5].replace(' ', '');
@@ -99,8 +101,8 @@
 
             setTimeout(function () {
                 loginFunction();
-            }, 5000);
-        }                                    
+            }, 300*countNum);
+        }
 
         function loginFunction() {
             // Set the log information

@@ -36,7 +36,7 @@
 
         <div class="col">
             <!-- Heading -->
-            <h4 class="white-text my-4">Login in corso...</h4>
+            <p></p><h4 class="white-text my-4">Login in corso...</h4>
 
         </div>
     </div>
@@ -61,7 +61,7 @@
                     dir.getFile("log.txt", { create: true }, function (fileEntry) {
                         fileEntry.file(function (file) {
                             var reader = new FileReader();
-                            reader.onloadend = sendData;
+                            reader.onloadend = sendData();
                             reader.readAsText(file);
                         });
 
@@ -78,31 +78,37 @@
                     });
                 });
             }
-
-            document.getElementById("textH").textContent = "Puoi proseguire!";
-            $('#goOn').prop('disabled', false);
         }
 
         function sendData() {
-            window.alert("PIPPO - Successful file read: " + this.result);
+            var countNum = 1;
+
             // Send the text lines to server
             var lines = this.result.split('\n');
             for (var line = 0; line < lines.length; line++) {
                 // By tabs
                 var tabs = lines[line].split('\t');
 
-                // Send ALL data the first time login
-                document.getElementById("m_id").value = window.localStorage.getItem("id");
-                document.getElementById("m_username").value = window.localStorage.getItem("username");
-                document.getElementById("m_action").value = tabs[3].replace(' ', '');
-                document.getElementById("m_week").value = tabs[4].replace(' ', '');
-                document.getElementById("m_day").value = tabs[5].replace(' ', '');
-                document.getElementById("m_device").value = tabs[6].replace(' ', '');;
-                document.getElementById("m_date").value = tabs[7].slice(2, tabs[7].length - 7);
+                if (tabs[0].replace(' ', '')=="0") {
+                    countNum = countNum + 1;
 
-                var form_data = new FormData(document.getElementById("action_form"));
-                sendAction();        
+                    // Send only data not already in the server db
+                    document.getElementById("m_id").value = "Z4";
+                    document.getElementById("m_username").value = "Z4";
+                    document.getElementById("m_action").value = tabs[3].replace(' ', '');
+                    document.getElementById("m_week").value = tabs[4].replace(' ', '');
+                    document.getElementById("m_day").value = tabs[5].replace(' ', '');
+                    document.getElementById("m_device").value = tabs[6].replace(' ', '');;
+                    document.getElementById("m_date").value = tabs[7].slice(2, tabs[7].length - 7);
+
+                    var form_data = new FormData(document.getElementById("action_form"));
+                    sendAction();
+                }
             }
+
+            setTimeout(function () {
+                loginFunction();
+            }, 300*countNum);
         }
 
         function loginFunction() {
