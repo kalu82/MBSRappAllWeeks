@@ -97,7 +97,9 @@
                 }
             }
 
-            setTimeout(loginFunction(), 3000);
+            setTimeout(function () {
+                loginFunction();
+            }, 5000);
         }                                    
 
         function loginFunction() {
