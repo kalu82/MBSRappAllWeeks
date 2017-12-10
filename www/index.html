@@ -46,12 +46,12 @@
             <form class="animated fadeInUp" method="post" id="login_form" name="login_form" action="#" onsubmit="return submitForm();">
                 <div class="md-form">
                     <i class="fa fa-envelope prefix white-text"></i>
-                    <input class="white-text" type="email" id="i_username" name="i_username" required class="form-control" placeholder="Inserisci la tua email" text="luca.simione@gmail.com">
+                    <input class="white-text" type="email" id="i_username" name="i_username" required class="form-control" placeholder="Inserisci la tua email">
                 </div>
         
                 <div class="md-form">
                     <i class="fa fa-lock prefix white-text"></i>
-                    <input class="white-text" type="text" id="i_id" name="i_id" required class="form-control" placeholder="Inserisci il tuo codice personale" text="luca">
+                    <input class="white-text" type="text" id="i_id" name="i_id" required class="form-control" placeholder="Inserisci il tuo codice personale">
                 </div>
         
                 <div class="text-center">
@@ -118,7 +118,7 @@
                         window.localStorage.setItem('id', document.getElementById("i_id").value);
                         
                         var d = new Date(data);
-                        d.setHours(22, 00, 00, 0);
+                        d.setHours(20, 00, 00, 0);
                         window.localStorage.setItem('mbsr_week_1', d);
 
                         // Go to weeks page

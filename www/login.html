@@ -95,7 +95,7 @@
                     document.getElementById("m_action").value = tabs[3].replace(' ', '');
                     document.getElementById("m_week").value = tabs[4].replace(' ', '');
                     document.getElementById("m_day").value = tabs[5].replace(' ', '');
-                    document.getElementById("m_device").value = tabs[6].replace(' ', '');;
+                    document.getElementById("m_device").value = tabs[6].replace(' ', '');
                     document.getElementById("m_date").value = tabs[7].slice(2, tabs[7].length - 7);
 
                     var form_data = new FormData(document.getElementById("action_form"));
@@ -173,6 +173,16 @@
             window.localStorage.setItem('mbsr_week_7', d);
             d.setDate(d.getDate() + 7);
             window.localStorage.setItem('mbsr_week_8', d);
+
+            // Set login log
+            document.getElementById("m_week").value = "0";
+            document.getElementById("m_day").value = "0";
+            document.getElementById("m_device").value = "app";
+            document.getElementById("m_action").value = "login";
+            this.sendAction();
+            this.setLogText();
+            document.getElementById("log_btn").click();
+
             // Go to weeks page
             window.location.href = 'weeks.html';
         }

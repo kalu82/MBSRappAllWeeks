@@ -54,8 +54,6 @@
     </form>
 
     <script>
-        var logTxt;
-
         document.addEventListener('deviceready', onDeviceReady, false);
         function onDeviceReady() {
             if (navigator.onLine) {
@@ -80,9 +78,6 @@
             var countNum = 1;
 
             // Send the text lines to server
-            window.alert("ORIGINAL: " + this.result);
-            window.alert("VAR = " + logTxt);
-            
             var lines = logTxt('\n');
             for (var line = 0; line < lines.length; line++) {
                 // By tabs
@@ -97,13 +92,16 @@
                     document.getElementById("m_action").value = tabs[3].replace(' ', '');
                     document.getElementById("m_week").value = tabs[4].replace(' ', '');
                     document.getElementById("m_day").value = tabs[5].replace(' ', '');
-                    document.getElementById("m_device").value = tabs[6].replace(' ', '');;
+                    document.getElementById("m_device").value = tabs[6].replace(' ', '');
                     document.getElementById("m_date").value = tabs[7].slice(2, tabs[7].length - 7);
 
                     var form_data = new FormData(document.getElementById("action_form"));
                     sendAction();
                 }
             }
+
+            // This is useful to remove the log file after login
+            window.localStorage.setItem('firstLogin', "1");
 
             setTimeout(function () {
                 loginFunction();
@@ -180,21 +178,15 @@
             d.setDate(d.getDate() + 7);
             window.localStorage.setItem('mbsr_week_8', d);
 
-            // Remove the log file
-            window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function (dir) {
-                    dir.getFile("log.txt", { create: true }, function (fileEntry) {
-                        fileEntry.remove(function () {
-                            // The file has been removed succesfully
-                            window.alert("File removed!");
-                        }, function (error) {
-                            // Error deleting the file
-                            window.alert("File not removed! ERR " + error);
-                        }, function () {
-                            // The file doesn't exist
-                            window.alert("File doesn't exist!");
-                        })
-                    });
-                });
+            // Set login log
+            document.getElementById("m_week").value = "0";
+            document.getElementById("m_day").value = "0";
+            document.getElementById("m_device").value = "app";
+            document.getElementById("m_action").value = "login";
+            this.sendAction();
+            this.setLogText();
+            document.getElementById("log_btn").click();
+
             // Go to weeks page
             window.location.href = 'weeks.html';
         }

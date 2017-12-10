@@ -37,7 +37,7 @@
 
 </head>
 
-<body onload="check_dates();";>
+<body onload="check_dates();">
     <div class="intro container-fluid d-flex justify-content-center">
         <div class="row">
             <div class="col">
@@ -80,86 +80,29 @@
     </div>
 
     <script>
-        function check_dates() {
-            // Set the log information
-            document.getElementById("m_id").value = window.localStorage.getItem("id");
-            document.getElementById("m_username").value = window.localStorage.getItem("username");
-                        
-            // Save the last login date
-            var d = new Date();
-            if (window.localStorage.getItem('lastlogin') == null) {
-                window.localStorage.setItem('lastlogin', d);
-            } else {
-                // If a day is passed (at midnight), erase the check status
-                var dlast = new Date(window.localStorage.getItem('lastlogin'));
-                dlast.setHours(00, 00, 01);
+        document.addEventListener('deviceready', onDeviceReady, false);
+        function onDeviceReady() {
+            if (window.localStorage.getItem("firstLogin") != null) {
+                window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function (dir) {
+                    dir.getFile("log.txt", { create: true }, function (fileEntry) {
+                        fileEntry.remove(function () {
+                            // The file has been removed succesfully
+                            window.alert("File removed!");
+                        }, function (error) {
+                            // Error deleting the file
+                            window.alert("File not removed! ERR " + error);
+                        }, function () {
+                            // The file doesn't exist
+                            window.alert("File doesn't exist!");
+                        })
+                    });
+                });
 
-                if (Math.ceil((d.getTime() - dlast.getTime()) / (1000 * 3600 * 24)) > 1) {
-                    window.localStorage.removeItem('week1_act1_done');
-                    window.localStorage.removeItem('week1_act2_done');
-                    window.localStorage.removeItem('week1_act3_done');
-                    window.localStorage.removeItem('week2_act1_done');
-                    window.localStorage.removeItem('week2_act2_done');
-                    window.localStorage.removeItem('week2_act3_done');
-                    window.localStorage.removeItem('week2_act4_done');
-                    window.localStorage.removeItem('week3_act1_done');
-                    window.localStorage.removeItem('week3_act2_done');
-                    window.localStorage.removeItem('week3_act3_done');
-                    window.localStorage.removeItem('week3_act4_done');
-                    window.localStorage.removeItem('week4_act1_done');
-                    window.localStorage.removeItem('week4_act2_done');
-                    window.localStorage.removeItem('week4_act3_done');
-                    window.localStorage.removeItem('week4_act4_done');
-                    window.localStorage.removeItem('week5_act1_done');
-                    window.localStorage.removeItem('week5_act2_done');
-                    window.localStorage.removeItem('week5_act3_done');
-                    window.localStorage.removeItem('week5_act4_done');
-                    window.localStorage.removeItem('week6_act1_done');
-                    window.localStorage.removeItem('week6_act2_done');
-                    window.localStorage.removeItem('week6_act3_done');
-                    window.localStorage.removeItem('week6_act4_done');
-                    window.localStorage.removeItem('week7_act1_done');
-                    window.localStorage.removeItem('week7_act2_done');
-                    window.localStorage.removeItem('week7_act3_done');
-                    window.localStorage.removeItem('week8_act1_done');
-                    window.localStorage.removeItem('week8_act2_done');
-                    window.localStorage.removeItem('week8_act3_done');
-                }
-                window.localStorage.setItem('lastlogin', d);
+                window.localStorage.
             }
+        }
 
-            // Set MBSR dates
-            d.setDate(7); d.setMonth(10); d.setYear(2017);
-            d.setHours(15, 00, 00, 0);
-
-            window.localStorage.setItem('mbsr_week_1', d);
-
-            d.setDate(d.getDate() + 7);
-            window.localStorage.setItem('mbsr_week_2', d);
-
-            d.setDate(d.getDate() + 7);
-            window.localStorage.setItem('mbsr_week_3', d);
-
-            d.setDate(d.getDate() + 7);
-            window.localStorage.setItem('mbsr_week_4', d);
-
-            d.setDate(d.getDate() + 7);
-            window.localStorage.setItem('mbsr_week_5', d);
-
-            d.setDate(d.getDate() + 7);
-            window.localStorage.setItem('mbsr_week_6', d);
-
-            d.setDate(d.getDate() + 7);
-            window.localStorage.setItem('mbsr_week_7', d);
-
-            d.setDate(d.getDate() + 7);
-            window.localStorage.setItem('mbsr_week_8', d);
-
-            document.getElementById("m_action").value = "login";
-            this.sendAction();
-            this.setLogText();
-            document.getElementById("log_btn").click();
-
+        function check_dates() {
             // // Check which week is the actual one
             // var now = new Date();
 
